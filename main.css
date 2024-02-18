@@ -39,7 +39,7 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: whitesmoke;
     margin: 0;
-    background-image: url("/home/vibhatsu/Documents/workspace/DevFolio/coolbg.webp");
+    background-image: url("./coolbg.webp");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
