@@ -1,0 +1,213 @@
+:root {
+    --primary-color: #FFD700;
+    --secondary-color: #333;
+    --tertiary-color: #04AA6D;
+    font-size: 20;
+}
+
+html {
+    scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 1rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+body {
+    align-self: center;
+    justify-content: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: whitesmoke;
+    margin: 0;
+    background-image: url("/home/vibhatsu/Documents/workspace/DevFolio/coolbg.webp");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    padding-top: 10rem;
+}
+
+/* Cool text */
+.cool {
+    color: aqua;
+}
+
+#cool {
+    transition-timing-function: ease-in-out;
+    transition-duration: 1s;
+}
+
+.cool:hover {
+    color: #FFD700;
+}
+
+/* navigation bar */
+.navtop {
+    background-color: #333;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 3rem;
+    overflow: hidden;
+}
+
+.navtop a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    display: block;
+    padding: 1% 1%;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.navtop a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navtop a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+ul.topnav {
+    list-style: none;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#greet {
+    font-size: 5em;
+    text-align: center;
+}
+
+.home {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 500000em;
+}
+
+/* hover image */
+#me {
+    display: inline;
+}
+
+.image-link {
+    display: inline-block;
+    /* position: relative; */
+    text-decoration: none;
+}
+
+
+.image-container {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    display: none;
+    width: 200px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-link:hover .image-container {
+    display: block;
+}
+
+/* Comments */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50rem;
+    height: 10rem;
+    color: #BEBEBE;
+    border: 1%, solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    color: #BEBEBE;
+    border-radius: 0rem;
+    margin-bottom: 1rem;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    color: #BEBEBE;
+    border-radius: 0rem;
+    margin-bottom: 1rem;
+}
+
+.glass {
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 1%, solid rgba(255, 255, 255, 0.3);
+    width: 60rem;
+    height: 10rem;
+    border-radius: 1rem;
+    color: #BEBEBE;
+
+}
+
+.b {
+    width: 50rem;
+    border-radius: 1rem;
+}
