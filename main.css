@@ -63,7 +63,7 @@ body {
     color: aqua;
 }
 
-#highlight {
+.highlight {
     transition-timing-function: ease-in-out;
     transition-duration: 1s;
 }
