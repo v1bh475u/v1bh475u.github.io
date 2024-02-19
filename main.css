@@ -70,6 +70,7 @@ body {
 
 .highlight:hover {
     color: #FFD700;
+    cursor:pointer;
 }
 
 /* navigation bar */
