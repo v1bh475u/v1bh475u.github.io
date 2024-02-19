@@ -65,12 +65,12 @@ body {
 
 .highlight {
     transition-timing-function: ease-in-out;
-    transition-duration: 1s;
+    transition-duration: .9s;
 }
 
 .highlight:hover {
     color: #FFD700;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* navigation bar */
@@ -91,6 +91,11 @@ body {
     padding: 1% 1%;
     text-decoration: none;
     font-size: 1.5rem;
+}
+
+.navtop a {
+    transition-timing-function: ease-in-out;
+    transition-duration: .1s;
 }
 
 .navtop a:hover {
@@ -119,16 +124,20 @@ ul.topnav {
     border-radius: 3rem;
 }
 
+#profile-pic:hover {
+    cursor: pointer;
+}
+
 #greet {
-    font-size: 5em;
+    font-size: 7rem;
     text-align: center;
 }
 
-.home {
+#home {
     text-align: center;
     display: flex;
     flex-direction: column;
-    font-size: 500000em;
+    font-size: 5rem;
 }
 
 /* hover image */
@@ -271,4 +280,54 @@ input {
 #send:hover {
     background-color: #04AA6D;
     cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .navtop {
+        height: 2rem;
+        font-size: 2%;
+        image-rendering: auto;
+    }
+
+    .topnav {
+        font-size: 10%;
+    }
+
+    .navtop a {
+        font-size: 1rem;
+    }
+
+    #profile-pic {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .glass {
+        width: 100%;
+    }
+
+    #greet {
+        font-size: 100%;
+
+    }
+
+    #name {
+        width: 100%;
+    }
+
+    #email {
+        width: 100%;
+    }
+
+    #msg {
+        width: 100%;
+    }
+
+    #send {
+        width: 100%;
+    }
 }
