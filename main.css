@@ -60,7 +60,7 @@ body {
 
 /* highlight text */
 .highlight {
-    color: aqua;
+    color: #66FCF1;
 }
 
 .highlight {
@@ -69,7 +69,6 @@ body {
 }
 
 .highlight:hover {
-    color: #FFD700;
     cursor: pointer;
 }
 
@@ -91,6 +90,8 @@ body {
     padding: 1% 1%;
     text-decoration: none;
     font-size: 1.5rem;
+    width: auto;
+    height: 1rem;
 }
 
 .navtop a {
@@ -99,8 +100,9 @@ body {
 }
 
 .navtop a:hover {
-    /* background-color: #ddd; */
-    color: aqua;
+    background-color: #ddd;
+    color: black;
+    border-radius: 2rem 2rem;
 }
 
 .navtop a.active {
@@ -111,15 +113,14 @@ body {
 ul.topnav {
     list-style: none;
     overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+    margin: -0.2rem 0rem 0rem 0rem;
+    padding: 0rem 0rem 0rem 0rem;
 }
 
 .navtop img {
     width: 2.5rem;
     height: 2.5rem;
     float: left;
-    /* margin-left: 1rem; */
     margin: .5rem .5rem .5rem 1rem;
     border-radius: 3rem;
 }
@@ -145,35 +146,14 @@ ul.topnav {
     display: inline;
 }
 
-.image-link {
-    display: inline-block;
-    /* position: relative; */
+#cryptohack {
+    color: aqua;
     text-decoration: none;
 }
 
+#cryptohack:hover {
+    color: #FFD700;
 
-.image-container {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, 10px);
-    display: none;
-    width: 200px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.image-container img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-.image-link:hover .image-container {
-    display: block;
 }
 
 /* contact-me */
@@ -188,33 +168,35 @@ ul.topnav {
     margin: 0;
 }
 
-.card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50rem;
-    height: 10rem;
-    color: #BEBEBE;
-    border: 1%, solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 1rem;
-    padding: 1rem;
-    overflow: hidden;
+
+#langs img {
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+
 }
 
-#comment {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: none;
-    color: #BEBEBE;
-    border-radius: 0rem;
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#langs img:hover {
+    cursor: pointer;
+
 }
+
+#projects {
+    width: 100%;
+    height: 100vh;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    margin: 9rem 1rem 1rem 1rem;
+}
+
+.project-container {
+    height: 400px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
 
 #contact-form {
     display: flex;
@@ -226,21 +208,14 @@ ul.topnav {
 
     background: rgba(255, 255, 255, 0.1);
     border: 1%, solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     width: 60rem;
-    height: 10rem;
+    height: fit-content;
+    padding: 1rem;
     border-radius: 1rem;
     color: #BEBEBE;
-
-}
-
-input {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: none;
-    color: #BEBEBE;
-    border-radius: 0rem;
-    margin-bottom: 1rem;
+    margin: 1rem;
 }
 
 
@@ -282,19 +257,58 @@ input {
     cursor: pointer;
 }
 
+input {
+    background-color: #333;
+    color: #BEBEBE;
+    border: none;
+    border-radius: .5rem;
+    padding: 1rem;
+    margin: 1rem;
+
+}
+
+footer {
+    background-color: #333;
+
+}
+
+.bottom {
+    align-items: baseline;
+    justify-content: center;
+}
+
+.socials {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+
+}
+
+.socials img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1rem;
+}
+
+
+#copyright {
+    text-align: center;
+    margin-top: 1rem;
+    color: #BEBEBE;
+
+}
+
 @media (max-width: 767px) {
     .navtop {
         height: 2rem;
-        font-size: 2%;
+        font-size: 0;
         image-rendering: auto;
     }
 
     .topnav {
-        font-size: 10%;
-    }
-
-    .navtop a {
-        font-size: 1rem;
+        font-size: 10rem;
     }
 
     #profile-pic {
@@ -307,12 +321,23 @@ input {
     }
 
     .glass {
+        width: 77%;
+        height: fit-content;
+        padding-bottom: 1rem;
+    }
+
+    #home {
         width: 100%;
+        /* padding: 1rem; */
     }
 
     #greet {
-        font-size: 100%;
+        font-size: 80%;
 
+    }
+
+    #details {
+        font-size: 1rem;
     }
 
     #name {
