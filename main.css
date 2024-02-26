@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #FFD700;
-    --secondary-color: #333;
-    --tertiary-color: #04AA6D;
+    --primary-color: #333;
+    --secondary-color: #ddd;
+    --tertiary-color: #eee;
     font-size: 20;
 }
 
@@ -17,6 +17,10 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.block {
+    display: inline;
 }
 
 /* Custom scrollbar */
@@ -47,7 +51,7 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: whitesmoke;
     margin: 0;
-    background-image: url("./coolbg.webp");
+    background-image: url("./bgimg.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -60,7 +64,7 @@ body {
 
 /* highlight text */
 .highlight {
-    color: #66FCF1;
+    color: #22d2ca;
 }
 
 .highlight {
@@ -68,18 +72,16 @@ body {
     transition-duration: .9s;
 }
 
-.highlight:hover {
-    cursor: pointer;
-}
 
 /* navigation bar */
 .navtop {
-    background-color: #333;
+    /* background-color: #333; */
     position: fixed;
     width: 100%;
-    top: 0;
+    top: .25rem;
     height: 3rem;
     overflow: hidden;
+    z-index: 1;
 }
 
 .navtop a {
@@ -91,7 +93,8 @@ body {
     text-decoration: none;
     font-size: 1.5rem;
     width: auto;
-    height: 1rem;
+    height: 2rem;
+    /* top: 1rem; */
 }
 
 .navtop a {
@@ -105,10 +108,6 @@ body {
     border-radius: 2rem 2rem;
 }
 
-.navtop a.active {
-    background-color: #04AA6D;
-    color: white;
-}
 
 ul.topnav {
     list-style: none;
@@ -129,10 +128,89 @@ ul.topnav {
     cursor: pointer;
 }
 
-#greet {
+.cssanimation,
+.cssanimation span {
+    animation-duration: 4s;
+    animation-fill-mode: forwards;
+}
+
+.cssanimation span {
+    display: inline-block;
+    /* transform-origin: 50% 50%; */
+    /* animation-iteration-count: infinite; */
+}
+
+@keyframes fadeInBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.fadeInBottom {
+    animation-name: fadeInBottom;
+    animation-timing-function: ease;
+    transform: translateY(100%);
+}
+
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+.fadeInRight {
+    animation-name: fadeInRight;
+    animation-timing-function: ease;
+    animation-delay: 1.4s;
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+@keyframes effect {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
+
+    100% {
+        opacity: 1;
+        color: #24d4cb;
+    }
+}
+
+.animated-name {
+    animation-name: effect;
+    animation-delay: 2s;
+    animation-timing-function: ease;
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.greet {
     font-size: 7rem;
     text-align: center;
 }
+
 
 #home {
     text-align: center;
@@ -141,69 +219,7 @@ ul.topnav {
     font-size: 5rem;
 }
 
-/* hover image */
-#details {
-    display: inline;
-}
-
-#cryptohack {
-    color: aqua;
-    text-decoration: none;
-}
-
-#cryptohack:hover {
-    color: #FFD700;
-
-}
-
-/* contact-me */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-
-#langs img {
-    width: 4rem;
-    height: 4rem;
-    margin: 1rem;
-
-}
-
-#langs img:hover {
-    cursor: pointer;
-
-}
-
-#projects {
-    width: 100%;
-    height: 100vh;
-    display: inline;
-    align-items: center;
-    justify-content: center;
-    margin: 9rem 1rem 1rem 1rem;
-}
-
-.project-container {
-    height: 400px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-}
-
-
-#contact-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
+/* Glassmorphism */
 .glass {
 
     background: rgba(255, 255, 255, 0.1);
@@ -217,6 +233,182 @@ ul.topnav {
     color: #BEBEBE;
     margin: 1rem;
 }
+
+#details {
+    display: inline;
+}
+
+#cryptohack {
+    color: #22d2ca;
+    text-decoration: none;
+}
+
+#cryptohack:hover {
+    color: #FFD700;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+/* About me */
+#langs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 1rem;
+    padding: auto;
+}
+
+#langs img {
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+}
+
+#langs img:hover {
+    cursor: pointer;
+}
+
+.tooltip {
+    position: relative;
+    display: inline;
+
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: .5rem;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: static;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* Projects section */
+#projects {
+    width: 100%;
+    height: 100vh;
+    display: inline;
+    align-items: center;
+    justify-content: center;
+    margin: 9rem 1rem 1rem 1rem;
+}
+
+.project-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 100px 50px;
+    padding: 100px 50px;
+}
+
+.project-container .project {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 350px;
+    height: 300px;
+    background: #1c3f5c;
+    border-radius: 1rem;
+    box-shadow: 0 35px 80px #24d4cb;
+    transition: .5s;
+}
+
+.project-container .project:hover {
+    height: 400px;
+    cursor: pointer;
+}
+
+.project-container .project .project-image {
+    position: absolute;
+    top: 20px;
+    width: 300px;
+    height: 220px;
+    background: #333;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.project-container .project:hover .project-image {
+    top: -100px;
+    scale: .75;
+    box-shadow: 0 15px 45px rgba(156, 229, 242, 0.1);
+}
+
+.project-container .project .project-image img {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-container .project .project-details {
+    position: absolute;
+    top: 11.4rem;
+    text-align: center;
+    padding: 0 30px;
+    width: 100%;
+    height: 3rem;
+    transition: .5s;
+    overflow: hidden;
+}
+
+.project-container .project:hover .project-details {
+    height: fit-content;
+    top: 4rem;
+}
+
+.project-container .project .project-details h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #24d4cb;
+}
+
+.project-container .project .project-details a {
+    position: relative;
+    display: inline-block;
+    padding: .5rem 1rem;
+    background-color: #22d2ca;
+    color: #ddd;
+    font-weight: 500;
+    border-radius: .5rem;
+    text-decoration: none;
+}
+
+/* contact-me */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 
 #name {
@@ -253,7 +445,7 @@ ul.topnav {
 }
 
 #send:hover {
-    background-color: #04AA6D;
+    background-color: #24d4cb;
     cursor: pointer;
 }
 
@@ -267,11 +459,7 @@ input {
 
 }
 
-footer {
-    background-color: #333;
-
-}
-
+/* footers */
 .bottom {
     align-items: baseline;
     justify-content: center;
@@ -300,21 +488,12 @@ footer {
 
 }
 
+/* Responsive */
 @media (max-width: 767px) {
     .navtop {
-        height: 2rem;
-        font-size: 0;
-        image-rendering: auto;
+        visibility: hidden;
     }
 
-    .topnav {
-        font-size: 10rem;
-    }
-
-    #profile-pic {
-        width: 1rem;
-        height: 1rem;
-    }
 
     .card {
         width: 100%;
@@ -324,11 +503,12 @@ footer {
         width: 77%;
         height: fit-content;
         padding-bottom: 1rem;
+        z-index: 1;
     }
 
     #home {
         width: 100%;
-        /* padding: 1rem; */
+        margin-top: 0;
     }
 
     #greet {
@@ -338,6 +518,14 @@ footer {
 
     #details {
         font-size: 1rem;
+    }
+
+    #langs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
     }
 
     #name {
