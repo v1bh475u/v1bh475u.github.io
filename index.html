@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="./logo.png" alt="Profile-pic">
+    <link rel="icon" type="image/png" href="./logo.png">
     <title>vibhatsu's porfolio</title>
 </head>
 <link rel="stylesheet" href="./main.css">
@@ -12,7 +12,9 @@
     <header>
         <div class="navtop">
             <ul class="topnav">
-                <li id="profile-pic"><img src="./profpic.jpeg" alt="profile-pic"></li>
+                <li id="profile-pic">
+                    <img src="./profpic.jpeg" alt="profile-pic">
+                </li>
                 <li><a href="#contact-me">Contact me</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -22,12 +24,15 @@
         </div>
 
     </header>
-    <div id="home">
-        <div class="container">
-            <h1 id="greet">Hello!<br> I am <span class="highlight">Vibhatsu</span></h1>
+    <div id="home" align="center">
+        <div class="center">
+            <h1 class="greet"><span class="cssanimation fadeInBottom">Hello!</span><br><span
+                    class="cssanimation fadeInRight"> I am </span><span
+                    class="cssanimation animated-name">Vibhatsu</span>
+            </h1>
         </div>
     </div>
-    <div class="container" id="about">
+    <div class="container" id="about" align="center">
         <div class="glass">
             <h1>About me</h1>
             <p id="details"> I am <span class="highlight">Maulik Barot</span>(aka <span
@@ -46,16 +51,34 @@
         </div>
     </div>
 
-    <div class="container" id="skills">
+    <div class="container" id="skills" align="center">
         <div class="glass">
             <h1>Skills</h1>
             <div id="langs">
-                <img src="./cicon.png">
-                <img src="./cppicon.png">
-                <img src="./javaicon.png">
-                <img src="./pythonicon.svg">
-                <img src="./html5.png">
-                <img src="./css.png">
+                <div class="tooltip">
+                    <img src="./cicon.png">
+                    <span class="tooltiptext">C</span>
+                </div>
+                <div class="tooltip">
+                    <img src="./cppicon.png">
+                    <span class="tooltiptext">C++</span>
+                </div>
+                <div class="tooltip">
+                    <img src="./javaicon.png">
+                    <span class="tooltiptext">Java</span>
+                </div>
+                <div class="tooltip">
+                    <img src="./pythonicon.svg">
+                    <span class="tooltiptext">Python</span>
+                </div>
+                <div class="tooltip">
+                    <img src="./html5.png">
+                    <span class="tooltiptext">HTML</span>
+                </div>
+                <div class="tooltip">
+                    <img src="./css.png">
+                    <span class="tooltiptext">CSS</span>
+                </div>
             </div>
         </div>
     </div>
@@ -64,6 +87,40 @@
             <h1>Projects</h1>
             <div class="project-container">
                 <div class="project">
+                    <div class="project-image">
+                        <img src="./project1.jpg" alt="project1">
+                    </div>
+                    <div class="project-details">
+                        <h2>Project 1</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nemo animi dolore aspernatur
+                            mollitia, beatae doloribus reiciendis dolorum quo saepe delectus impedit odit id
+                            accusantium, quaerat non vel pariatur! Officia.</p>
+                        <a href="#">Check it out</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <div class="project-image">
+                        <img src="./project2.jpg" alt="project2">
+                    </div>
+                    <div class="project-details">
+                        <h2>Project 2</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nemo animi dolore aspernatur
+                            mollitia, beatae doloribus reiciendis dolorum quo saepe delectus impedit odit id
+                            accusantium, quaerat non vel pariatur! Officia</p>
+                        <a href="#">Check it out</a>
+                    </div>
+                </div>
+                <div class="project">
+                    <div class="project-image">
+                        <img src="./project3.jpg" alt="project3">
+                    </div>
+                    <div class="project-details">
+                        <h2>Project 3</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nemo animi dolore aspernatur
+                            mollitia, beatae doloribus reiciendis dolorum quo saepe delectus impedit odit id
+                            accusantium, quaerat non vel pariatur! Officia</p>
+                        <a href="#">Check it out</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,5 +147,7 @@
             <a href="mailto:maulikbarot2915@gmail.com"><img src="./gmail.png" alt="gmail"></a>
         </div>
         <p id="copyright">&copy; 2024 Vibhatsu</p>
+    </div>
+</footer>
 
 </html>
