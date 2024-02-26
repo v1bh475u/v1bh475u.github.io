@@ -386,7 +386,7 @@ ul.topnav {
 }
 
 .project-container .project .project-details h2 {
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #24d4cb;
 }
@@ -489,35 +489,14 @@ input {
 }
 
 /* Responsive */
-@media (max-width: 767px) {
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
     .navtop {
         visibility: hidden;
     }
 
-
-    .card {
-        width: 100%;
-    }
-
     .glass {
-        width: 77%;
-        height: fit-content;
-        padding-bottom: 1rem;
-        z-index: 1;
-    }
-
-    #home {
-        width: 100%;
-        margin-top: 0;
-    }
-
-    .greet {
-        font-size: 80%;
-
-    }
-
-    #details {
-        font-size: 1rem;
+        width: 70%;
     }
 
     #langs {
@@ -525,22 +504,82 @@ input {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-
     }
 
-    #name {
-        width: 100%;
+    body {
+        font-size: 1.5rem;
     }
 
-    #email {
-        width: 100%;
+    #home .greet {
+        font-size: 50%;
     }
 
+    #contact-form,
+    #name,
+    #email,
     #msg {
-        width: 100%;
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
+    #home {
+        width: 70%;
+    }
+
+    #home,
+    #about,
+    #skills {
+        height: auto;
+    }
+
+    #projects {
+        margin: 9rem 1rem 1rem 0rem;
+    }
+}
+
+
+
+@media only screen and (max-width: 992px) {
+
+    #home {
+        width: 98%;
+        position: relative;
+        top: -12rem;
+    }
+
+    #home h1 {
+        font-size: 8rem;
+    }
+
+    .glass {
+        width: 80%;
+        font-size: 1.5rem;
+    }
+
+    #projects {
+        height: auto;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .glass {
+        width: 80%;
+        font-size: 2rem;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .glass {
+        width: 90%;
+        font-size: 2rem;
     }
 
     #send {
-        width: 100%;
+        width: auto;
+        font-size: 1.25rem;
     }
 }
