@@ -511,7 +511,7 @@ input {
         margin-top: 0;
     }
 
-    #greet {
+    .greet {
         font-size: 80%;
 
     }
