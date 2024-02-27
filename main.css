@@ -253,7 +253,7 @@ ul.topnav {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    height: auto;
     padding: 0;
     margin: 0;
 }
@@ -265,7 +265,6 @@ ul.topnav {
     align-items: center;
     justify-content: space-evenly;
     margin: 1rem;
-    padding: auto;
 }
 
 #langs img {
@@ -299,6 +298,7 @@ ul.topnav {
     bottom: 100%;
     left: 50%;
     margin-left: -60px;
+    font-size: 1rem;
 }
 
 .tooltip:hover .tooltiptext {
@@ -312,7 +312,7 @@ ul.topnav {
     display: inline;
     align-items: center;
     justify-content: center;
-    margin: 9rem 1rem 1rem 1rem;
+    margin: 7rem 1rem 8rem 1rem;
 }
 
 .project-container {
@@ -509,6 +509,12 @@ input {
         font-size: 1.5rem;
     }
 
+    #home {
+        height: auto;
+        font-size: 9rem;
+
+    }
+
     #home .greet {
         font-size: 50%;
     }
@@ -518,6 +524,14 @@ input {
     #email,
     #msg {
         width: 80%;
+    }
+
+    #projects {
+        margin: 0rem 1rem 0rem 1rem;
+    }
+
+    .project-details {
+        font-size: 1rem;
     }
 }
 
@@ -529,12 +543,14 @@ input {
 
     #home,
     #about,
-    #skills {
+    #skills,
+    #contact-me {
         height: auto;
+        margin: auto;
     }
 
     #projects {
-        margin: 9rem 1rem 1rem 0rem;
+        margin: 0rem 1rem 1rem 0rem;
     }
 }
 
@@ -560,6 +576,10 @@ input {
     #projects {
         height: auto;
     }
+
+    .tooltiptext {
+        font-size: 1rem;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -575,6 +595,10 @@ input {
     .glass {
         width: 90%;
         font-size: 2rem;
+    }
+
+    #projects {
+        margin: 0rem 1rem 5rem 1rem;
     }
 
     #send {
