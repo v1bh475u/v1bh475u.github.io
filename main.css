@@ -26,7 +26,7 @@ html {
 /* Custom scrollbar */
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: .5rem;
 }
 
 /* Track */
@@ -51,7 +51,7 @@ body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: whitesmoke;
     margin: 0;
-    background-image: url("./bgimg.jpg");
+    background-image: url("./assets/background/bgimg.jpg");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -223,8 +223,8 @@ ul.topnav {
 
     background: rgba(255, 255, 255, 0.1);
     border: 1%, solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
     width: 60rem;
     height: fit-content;
     padding: 1rem;
@@ -285,7 +285,7 @@ ul.topnav {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 1rem;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -297,7 +297,7 @@ ul.topnav {
     z-index: 1;
     bottom: 100%;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -3rem;
     font-size: 1rem;
 }
 
@@ -321,8 +321,8 @@ ul.topnav {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 100px 50px;
-    padding: 100px 50px;
+    gap: 1rem 5rem;
+    padding: 5rem 2rem;
 }
 
 .project-container .project {
@@ -330,24 +330,24 @@ ul.topnav {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    width: 350px;
-    height: 300px;
+    width: 17rem;
+    height: 15rem;
     background: #1c3f5c;
     border-radius: 1rem;
-    box-shadow: 0 35px 80px #24d4cb;
+    box-shadow: 0 3rem 6rem #24d4cb;
     transition: .5s;
 }
 
 .project-container .project:hover {
-    height: 400px;
+    height: 20rem;
     cursor: pointer;
 }
 
 .project-container .project .project-image {
     position: absolute;
-    top: 20px;
-    width: 300px;
-    height: 220px;
+    top: 1rem;
+    width: 15rem;
+    height: 11rem;
     background: #333;
     border-radius: 1rem;
     overflow: hidden;
@@ -355,9 +355,9 @@ ul.topnav {
 }
 
 .project-container .project:hover .project-image {
-    top: -100px;
+    top: -5.5rem;
     scale: .75;
-    box-shadow: 0 15px 45px rgba(156, 229, 242, 0.1);
+    box-shadow: 0 1rem 4rem rgba(122, 234, 253, 0.463);
 }
 
 .project-container .project .project-image img {
@@ -372,7 +372,6 @@ ul.topnav {
     position: absolute;
     top: 11.4rem;
     text-align: center;
-    padding: 0 30px;
     width: 100%;
     height: 3rem;
     transition: .5s;
