@@ -48,10 +48,12 @@ html {
 body {
     align-self: center;
     justify-content: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: "Anta", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     color: whitesmoke;
     margin: 0;
-    background-image: url("./assets/background/bgimg.jpg");
+    background-image: linear-gradient(#020411, #3a9aa9);
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -75,51 +77,64 @@ body {
 
 /* navigation bar */
 .navtop {
-    /* background-color: #333; */
+    background-color: #1c3f5c;
     position: fixed;
     width: 100%;
-    top: .25rem;
-    height: 3rem;
+    top: -1.25rem;
+    height: 4rem;
     overflow: hidden;
     z-index: 1;
 }
 
-.navtop a {
-    float: right;
-    color: #f2f2f2;
-    text-align: center;
-    display: block;
-    padding: 1% 1%;
-    text-decoration: none;
-    font-size: 1.5rem;
-    width: auto;
-    height: 2rem;
-    /* top: 1rem; */
+li {
+    list-style-type: none;
 }
 
-.navtop a {
-    transition-timing-function: ease-in-out;
-    transition-duration: .1s;
+#nav-list {
+    display: flex;
+    font-size: 100%;
+    margin-right: 5%;
+    justify-content: flex-end;
+    align-items: center;
+    vertical-align: middle;
+    height: 100%;
+}
+
+
+@media (width <=768px) {
+    #nav-left {
+        width: 0%;
+        display: none;
+    }
+
+    #nav-right {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #nav-list {
+        justify-content: center;
+        font-size: 3vw;
+    }
+}
+
+.nav-link a {
+    text-decoration: none;
+    color: white;
+    padding: 1rem;
+    transition: 0.3s;
 }
 
 .navtop a:hover {
-    background-color: #ddd;
-    color: black;
+    color: #24d4cb;
 }
 
-
-ul.topnav {
-    list-style: none;
-    overflow-x: hidden;
-    margin: -0.2rem 0rem 0rem 0rem;
-    padding: 0rem 0rem 0rem 0rem;
-}
 
 .navtop img {
     width: 2.5rem;
     height: 2.5rem;
     float: left;
-    margin: .5rem .5rem .5rem 1rem;
+    margin: 1.4rem .5rem .5rem 1rem;
     border-radius: 3rem;
 }
 
@@ -280,12 +295,13 @@ ul.topnav {
 .tooltip {
     position: relative;
     display: inline;
+    align-items: center;
 
 }
 
 .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 1rem;
+    display: none;
+    width: 0%;
     background-color: black;
     color: #fff;
     text-align: center;
@@ -299,10 +315,18 @@ ul.topnav {
     left: 50%;
     margin-left: -3rem;
     font-size: 1rem;
+    transition: 1s;
 }
 
 .tooltip:hover .tooltiptext {
-    visibility: visible;
+    display: block;
+    width: 100%;
+}
+
+.skill-icon {
+    width: 7rem;
+    height: 7rem;
+    margin: 2rem;
 }
 
 /* Projects section */
@@ -489,8 +513,14 @@ input {
 /* Responsive */
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
-    .navtop {
-        visibility: hidden;
+    .navtop img {
+        display: none;
+        width: 0%;
+    }
+
+    #topnav {
+        font-size: 2vw;
+        justify-content: center;
     }
 
     .glass {
@@ -600,13 +630,25 @@ input {
         font-size: 2rem;
     }
 
+    #contact-me h1 {
+        font-size: 3rem;
+    }
+
+    #name,
+    #email,
+    #msg {
+        font-size: 1.25rem;
+    }
+
+    #send {
+        font-size: 1rem;
+    }
 
     #projects {
         margin: 0rem 1rem 5rem 1rem;
     }
 
-    #send {
-        width: auto;
-        font-size: 1.25rem;
+    #projects h1 {
+        font-size: 3rem;
     }
 }
