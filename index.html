@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="./logo.png">
     <title>vibhatsu's porfolio</title>
 </head>
@@ -11,15 +14,15 @@
 <body align="center">
     <header>
         <div class="navtop">
-            <ul class="topnav">
-                <li id="profile-pic">
-                    <img src="./assets/profpic.jpeg" alt="profile-pic">
-                </li>
-                <li><a href="#contact-me">Contact me</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#about">About me</a></li>
-                <li><a href="#home">Home</a></li>
+            <div id="profile-pic">
+                <img src="./assets/profpic.jpeg" alt="profile-pic">
+            </div>
+            <ul id="nav-list">
+                <li class="nav-link"><a href="#home">Home</a></li>
+                <li class="nav-link"><a href="#about">About me</a></li>
+                <li class="nav-link"><a href="#skills">Skills</a></li>
+                <li class="nav-link"><a href="#projects">Projects</a></li>
+                <li class="nav-link"><a href="#contact-me">Contact me</a></li>
             </ul>
         </div>
 
@@ -56,23 +59,23 @@
             <h1>Skills</h1>
             <div id="langs">
                 <div class="tooltip">
-                    <img src="./assets/languages/cicon.png">
+                    <img src="./assets/languages/cicon.png" class="skill-icon">
                     <span class="tooltiptext">C</span>
                 </div>
                 <div class="tooltip">
-                    <img src="./assets/languages/cppicon.png">
+                    <img src="./assets/languages/cppicon.png" class="skill-icon">
                     <span class="tooltiptext">C++</span>
                 </div>
                 <div class="tooltip">
-                    <img src="./assets/languages/javaicon.png">
+                    <img src="./assets/languages/javaicon.png" class="skill-icon">
                     <span class="tooltiptext">Java</span>
                 </div>
                 <div class="tooltip">
-                    <img src="./assets/languages/pythonicon.svg">
+                    <img src="./assets/languages/pythonicon.svg" class="skill-icon">
                     <span class="tooltiptext">Python</span>
                 </div>
                 <div class="tooltip">
-                    <img src="./assets/languages/html5.png">
+                    <img src="./assets/languages/html5.png" class="skill-icon">
                     <span class="tooltiptext">HTML</span>
                 </div>
                 <div class="tooltip">
@@ -95,7 +98,7 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nemo animi dolore aspernatur
                             mollitia, beatae doloribus reiciendis dolorum quo saepe delectus impedit odit id
                             accusantium, quaerat non vel pariatur! Officia.</p>
-                        <a href="#">Check it out</a>
+                        <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">Check it out</a>
                     </div>
                 </div>
                 <div class="project">
@@ -107,7 +110,7 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nemo animi dolore aspernatur
                             mollitia, beatae doloribus reiciendis dolorum quo saepe delectus impedit odit id
                             accusantium, quaerat non vel pariatur! Officia</p>
-                        <a href="#">Check it out</a>
+                        <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">Check it out</a>
                     </div>
                 </div>
                 <div class="project">
@@ -119,7 +122,7 @@
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nemo animi dolore aspernatur
                             mollitia, beatae doloribus reiciendis dolorum quo saepe delectus impedit odit id
                             accusantium, quaerat non vel pariatur! Officia</p>
-                        <a href="#">Check it out</a>
+                        <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0">Check it out</a>
                     </div>
                 </div>
             </div>
