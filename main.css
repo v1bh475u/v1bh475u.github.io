@@ -255,7 +255,7 @@ ul.topnav {
     width: 100%;
     height: auto;
     padding: 0;
-    margin: 0;
+    margin: 0rem 0rem 17rem;
 }
 
 /* About me */
@@ -312,7 +312,7 @@ ul.topnav {
     display: inline;
     align-items: center;
     justify-content: center;
-    margin: 7rem 1rem 8rem 1rem;
+    margin: 3rem 1rem 8rem 0rem;
 }
 
 .project-container {
@@ -568,6 +568,10 @@ input {
         font-size: 8rem;
     }
 
+    .container {
+        margin: 3rem 0rem 3rem 0rem;
+    }
+
     .glass {
         width: 80%;
         font-size: 1.5rem;
@@ -596,6 +600,7 @@ input {
         width: 90%;
         font-size: 2rem;
     }
+
 
     #projects {
         margin: 0rem 1rem 5rem 1rem;
