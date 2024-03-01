@@ -23,24 +23,22 @@ html {
     display: inline;
 }
 
-/* Custom scrollbar */
-/* width */
 ::-webkit-scrollbar {
     width: .5rem;
 }
 
-/* Track */
+
 ::-webkit-scrollbar-track {
     background: black;
 }
 
-/* Handle */
+
 ::-webkit-scrollbar-thumb {
     background: #ddd;
     border-radius: 1rem;
 }
 
-/* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
@@ -62,9 +60,10 @@ body {
     flex-direction: column;
     overflow-x: hidden;
     padding-top: 10rem;
+    scroll-snap-type: y mandatory;
 }
 
-/* highlight text */
+
 .highlight {
     color: #22d2ca;
 }
@@ -74,8 +73,14 @@ body {
     transition-duration: .9s;
 }
 
+#skills,
+#projects,
+#contact-me,
+#about {
+    scroll-padding-top: 10rem;
+    scroll-snap-align: center;
+}
 
-/* navigation bar */
 .navtop {
     background-color: #1c3f5c;
     position: fixed;
@@ -84,6 +89,7 @@ body {
     height: 4rem;
     overflow: hidden;
     z-index: 1;
+    padding-bottom: .5rem;
 }
 
 li {
@@ -96,7 +102,6 @@ li {
     margin-right: 5%;
     justify-content: flex-end;
     align-items: center;
-    vertical-align: middle;
     height: 100%;
 }
 
@@ -118,11 +123,15 @@ li {
     }
 }
 
+.nav-link {
+    text-align: center;
+}
+
 .nav-link a {
-    text-decoration: none;
     color: white;
-    padding: 1rem;
-    transition: 0.3s;
+    margin: 0 1rem;
+    text-decoration: none;
+    display: flex;
 }
 
 .navtop a:hover {
@@ -233,7 +242,7 @@ li {
     font-size: 5rem;
 }
 
-/* Glassmorphism */
+
 .glass {
 
     background: rgba(255, 255, 255, 0.1);
@@ -273,7 +282,7 @@ li {
     margin: 0rem 0rem 17rem;
 }
 
-/* About me */
+
 #langs {
     display: flex;
     flex-direction: row;
@@ -295,11 +304,16 @@ li {
 .tooltip {
     position: relative;
     display: inline;
-    align-items: center;
-
+    width: 100%;
 }
 
-.tooltip .tooltiptext {
+.tooltiptext {
+    align-items: center;
+    width: 100%;
+    display: inline;
+}
+
+.tooltip .tooltiptext div {
     display: none;
     width: 0%;
     background-color: black;
@@ -307,20 +321,19 @@ li {
     text-align: center;
     border-radius: .5rem;
     padding: 0.5rem 0.5rem;
-
-    /* Position the tooltip */
     position: static;
     z-index: 1;
     bottom: 100%;
     left: 50%;
     margin-left: -3rem;
     font-size: 1rem;
-    transition: 1s;
+    transition: 2s;
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltiptext div {
     display: block;
-    width: 100%;
+    margin: 0 auto;
+    width: fit-content;
 }
 
 .skill-icon {
@@ -329,7 +342,6 @@ li {
     margin: 2rem;
 }
 
-/* Projects section */
 #projects {
     width: 100%;
     height: 100vh;
@@ -345,7 +357,7 @@ li {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 1rem 5rem;
+    gap: 5rem 5rem;
     padding: 5rem 2rem;
 }
 
@@ -424,7 +436,6 @@ li {
     text-decoration: none;
 }
 
-/* contact-me */
 #contact-form {
     display: flex;
     flex-direction: column;
@@ -481,7 +492,6 @@ input {
 
 }
 
-/* footers */
 .bottom {
     align-items: baseline;
     justify-content: center;
@@ -510,7 +520,6 @@ input {
 
 }
 
-/* Responsive */
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
     .navtop img {
@@ -631,7 +640,7 @@ input {
     }
 
     #contact-me h1 {
-        font-size: 3rem;
+        font-size: 4rem;
     }
 
     #name,
@@ -649,6 +658,6 @@ input {
     }
 
     #projects h1 {
-        font-size: 3rem;
+        font-size: 4em;
     }
 }
