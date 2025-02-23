@@ -6,6 +6,7 @@ theme = "re-terminal"
 pagination.pagerSize = 5
 title = "vibhatsu's blog"
 
+canonifyURLs = true
 [params]
 # dir name of your main content (default is `content/posts`).
 # the list of set content will show up on your index page (baseurl).
