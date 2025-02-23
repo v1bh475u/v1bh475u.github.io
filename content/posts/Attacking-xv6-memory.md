@@ -7,6 +7,7 @@ coverCaption = "Always zero-out memory"
 description = "An explained solution to xv6 syscall-lab's final task"
 readingTime = true
 keywords = ["xv6", "OS", "memory"]
+date = '2025-01-01T19:23:33+05:30'
 +++
 I have been reading and trying out MIT's course on xv6. In its syscall lab, the final task was very interesting. In this lab, pages were not getting zeroed out when allocated. So, there was chance of memory leak from the previous process. I was stuck on this task for a long time and could not find any help online. So, I read the code and the xv6 book and thought of a solution. Here's how it works.
 
