@@ -305,6 +305,11 @@ void mydbg::debugger::handle_command(const std::string &line)
     else if (is_prefix(command, "disass"))
     {
         disassember di{m_prog_name};
+        if(args.size() != 2)
+        {
+            std::cerr << "\x1B[1m\x1B[91mInvalid number of arguments\x1B[38;5;28m\nPlease provide a function name\x1B[0m\n";
+            return;
+        }
         func_data func = di.get_func(args[1]);
         di.disassemble(func.func_code, func.code_size, func.address);
     }
@@ -330,6 +335,7 @@ void mydbg::debugger::handle_command(const std::string &line)
                   << "regs w <register> <value> - Write register value\n"
                   << "mem r <address> - Read memory at address\n"
                   << "mem w <address> <value> - Write memory at address\n"
+                  << "disass <function> - Disassemble function\n"
                   << "so - Step over breakpoint\n"
                   << "si - Step instruction\n"
                   << "bt             - shows call stack\n"
