@@ -91,8 +91,8 @@ Now, suppose we need to allocate 5 bytes. We can see that we have enough memory 
 
 ## Implemtation Issues
 
-- _Free block organization:_ how free blocks will be handled? Whether we want to use create a linked list for it or store it in some other way.
-- _Placement:_ which free block to use for allocation? Consider the scene where we have multiple scattered free blocks separated by allocated blocks. Now, there is a request for allocation. Which free particular free block should be used? Should we use the first free block? Should we use the smallest free block that can accomodate the request?
+- _Free block organization:_ How free blocks will be handled? Whether we want to use a linked list for it or store it in some other way.
+- _Placement:_ Which free block to use for allocation? Consider the scene where we have multiple scattered free blocks separated by allocated blocks. Now, there is a request for allocation. Which free particular free block should be used? Should we use the first free block? Should we use the smallest free block that can accomodate the request?
 - _Splitting:_ what to do with remainder of the free block after allocation?
 - _Coalescing:_ Combining adjacent free blocks. If we free a block next to an already free block, we need to combine them or else our algorithm to find the free block that suffices the request will fail to recognize the combined free block.
 
