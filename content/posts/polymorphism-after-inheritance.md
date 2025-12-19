@@ -158,6 +158,12 @@ int main() {
 - Also, for each new functionality, we need to create a new base class for the strategy. This can lead to a proliferation of base classes which can be hard to manage.
 - Notice how difficult it is to create a copy of an existing shape like `Circle`. You need to copy not only the phyiscal attributes like `radius` but also the strategy which are stored as `unique_ptr`. This can lead to a lot of boilerplate code and complexity. What we want from our shapes is to behave like value types, for example `int`- easy to copy, easy to move, easy to store- but still have polymorphic behavior! Thus, our solution is far from perfect.
 
+What we actually want from our solution is the ability to extend along 3 axes independently:
+1. Adding new shapes like Triangle, Rectangle etc.
+2. Adding new functionalities like serialize(), transform() etc.
+3. Adding new implementations for existing functionalities like OpenGL, Vulkan etc.
+
+Extension along any of these axes should not affect the other axes. This is where Type Erasure comes into play.
 ## A Better Solution: Type Erasure
 Some of the readers may have heard of the term "Type Erasure" before but for the sake of completeness, let's define it here. Firstly, let's be very clear what "type erasure" is NOT!
 - Type erasure is **NOT** just a `void*`;
@@ -193,7 +199,7 @@ public:
     double getSide() const { return side; }
 };
 ```
-Next, we create two structs as below. First, we create a base class `ShapeConcept` that defines the interface for the operations we want to perform on the shapes. This class has pure virtual functions for each operation like `draw()`, `serialize()` etc. Next, we create a templated derived class `ShapeModel` that implements the `ShapeConcept` interface for a specific shape type `T`. This class stores an object of type `T` which is one of our shape(`Circle`, `Square`, etc.) and implements the operations. What we are doing here allowing libraries to implement their operations on our geometric primitives using free functions(functions not bound to any class). Why free functions? They grant much more flexibility than other types of functions.
+Next, we create two structs as below. First, we create a base class `ShapeConcept` that defines the interface for the operations we want to perform on the shapes. This class has pure virtual functions for each operation like `draw()`, `serialize()` etc. Next, we create a templated derived class ShapeModel that implements the `ShapeConcept` interface for a specific shape type `T`. This class stores an object of type `T` which is one of our shape(`Circle`, `Square`, etc.) and implements the operations. What we are doing here is allowing libraries to implement their operations on our geometric primitives using free functions(functions not bound to any class). Why free functions? They grant much more flexibility than other types of functions. So, now changing the library implementation is as simple as changing the include files! If we want to use `OpenGL`, we include the `OpenGL` header files! If we want to use `Vulkan`, we include the `Vulkan` header files!
 ```cpp
 struct ShapeConcept {
     virtual ~ShapeConcept() = default;
@@ -215,7 +221,7 @@ struct ShapeModel : ShapeConcept {
     }
 };
 ```
-This is our first design pattern - **External Polymorphism**. Here, we are separating the interface from the implementation. The `ShapeConcept` defines the interface and the `ShapeModel` implements the interface for a specific shape type. This allows us to add new shapes without modifying the existing code. It is the design technique where polymorphic behavior is achieved outside the concrete object, rather than through inheritance and virtual functions. The higher classes can treat different types uniformly through a common interface, while the actual behavior is defined externally.
+This is our first design pattern - **External Polymorphism**. The intent of this design pattern is to make the behvaiour vary independently of the object’s type, without requiring object to participate in the polymorphism. The objects(`Circle`, `Square`, etc.) are just dumb data holders while `ShapeModel` provides the polymorphic behavior by implementing the operations using free functions. This reduces us the cost of double indirections and also frees the two axes of extension from each other. Now, we can add new shapes without affecting the operations and vice-versa. Let’s see how we can use these classes:
 
 ```cpp
 int main() {
@@ -228,7 +234,7 @@ int main() {
     return 0;
 }
 ```
-Even after this solution, we still have a lot of manual small allocations and a lot of play with pointers. So, let's just wrap this all in a single class and make it manage the memory for us.
+Even after this solution, we still have a lot of manual small allocations and a lot of play with pointers. So, let’s just wrap this all in a single class and make it manage the memory for us. Why wrap? Because we want to provide a clean interface to the user and hide the implementation details.
 ```cpp
 class Shape {
 private:
@@ -263,7 +269,9 @@ public:
     Shape(T obj) : shapePtr{ShapeModel<T>{std::move(obj)}} {}
 };
 ```
-The templated constructor here allows the `Shape` class to accept any shape type and create the appropriate `ShapeModel` for it, store it and then just forget about it. The user of the `Shape` class does not need to worry about the memory management or the details of the shape type. This is our second design pattern - **Bridge Pattern**. The Bridge Pattern is a structural design pattern that decouples an abstraction from its implementation so that the two can vary independently. In this case, the `Shape` class is the abstraction and the `ShapeConcept` and `ShapeModel` classes are the implementation. This allows us to change the implementation without affecting the abstraction.
+The templated constructor here allows the `Shape` class to accept any shape type and create the appropriate `ShapeModel` for it, store it and then just forget about it. The user of the `Shape` class does not need to worry about the memory management or the details of the shape type. 
+
+Structurally, this is our second design pattern - **Bridge Pattern**. The Bridge Pattern is a structural design pattern that decouples an abstraction from its implementation so that the two can vary independently. In this case, the `Shape` class is the abstraction and the `ShapeConcept` is the implementor interface and `ShapeModel<T>` classes are the concrete implementations. This allows abstraction (`Shape`) and implementations (`ShapeModel<T>`) to vary independently. New concrete types can be supported without modifying `Shape`, and the changes to `Shape` do not affect the concrete types.
 
 Notice, we also have friend functions `draw()` and `serialize()` that call the corresponding methods on the `ShapeConcept`. This allows us to call these functions on the `Shape` class without exposing the implementation details. 
 
@@ -310,7 +318,7 @@ int main() {
 Thus, we have successfully designed a system that can store different shapes in a single container and call their `draw()` methods without knowing the implementation details, created opportunities for easy extension of functionalities without increasing the depth of class hierarchies and avoided code duplication - all while avoiding the drawbacks of inheritance and virtual functions!
 
 ### A safer templated constructor
-One issue with the above implementation is that the templated constructor can accept any type, even those that do not have the required operations like `draw()` and `serialize()`. This can lead to compilation errors that are hard to understand. To avoid this, we can use `concepts` to constrain the types that can be passed to the templated constructor. Let's define a concept `Drawable` that checks if a type has the required operations.
+One issue with the above implementation is that the templated constructor can accept any type, even those that do not have the required operations like `draw()` and `serialize()`. This can lead to compilation errors that are hard to understand. To avoid this, we can use `concepts` to constrain the types that can be passed to the templated constructor. Let's define a concept `Drawable` that checks if a type has the required operations. Similarly, we can define a concept `Serializable` for the `serialize()` operation. Finally, we can define a concept `Shapelike` that combines both `Drawable` and `Serializable`. We can then use this concept to constrain the templated constructor of the `Shape` class.
 ```cpp
 template <typename T>
 concept Drawable = requires(T obj) {
@@ -338,6 +346,9 @@ As we can see in the above architecture diagram, the `Shape` class acts as a wra
 One level below this, we have all the different kinds of shapes like `Circle`, `Square` etc. These are totally independent of each other, don't know about each other's existence, don't know what operations can be performed on them and have zero knowledge about the level above them and below them. Now, these can be presented at any level but for the sake of clarity, we put them here. 
 
 Now, we need to combine all of these. This happens with `draw()` implementation. This happens with the help of templated constructor of `ShapeModel` which acts as a bridge between the two levels and we don't need to create those classes for each shape as the compiler itself generates them for us. Thus, we have very loose coupling between the different levels.
+
+In this blog, we have concentrated on design perspective and thus I must admit that there are a lot of performance optimizations that can be done to this design. For example, we can use `small buffer optimization` to avoid heap allocations for small objects. These optimizations are out of the scope of this blog but I would recommend the readers to look into them.
 ## References
 1. [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612) by Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
 2. [Breaking Dependencies: Type Erasure - A Design Analysis](https://youtu.be/4eeESJQk-mw?si=aOFHcYz2ygJMNv0r)
+3. [Breaking Dependencies: Type Erasure - The Implementation Details](https://www.youtube.com/watch?v=qn6OqefuH08)
