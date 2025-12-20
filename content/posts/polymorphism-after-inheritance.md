@@ -7,7 +7,7 @@ cover = ""
 coverCaption = "Change is the enemy of the perfect design."
 description = "Using type erasure to achieve polymorphism in C++."
 readingTime = true
-keywords = ["c++", "design patterns", "type erasure"]
+keywords = ["c++", "design patterns", "type erasure", "external polymorphism", "bridge pattern", "prototype pattern", "strategy pattern"]
 +++
 Recently, I had been involved in an implementation-heavy project where we had to design the architecture for a few components. It is my first project of this scale and we had quite the hard deadlines. We ended up using not so elegant solutions to get things done quickly. This did not satisfy me and I knew there should be better ways of doing things. Hence, I started researching for solutions and came across the concept of Type Erasure in C++. `Klaus Iglberger` has a great talk on this topic. I would like to share my understanding of Type Erasure through this blog post.
 
@@ -170,10 +170,12 @@ Some of the readers may have heard of the term "Type Erasure" before but for the
 - Type erasure is **NOT** `pointer-to-base-class`;
 - Type erasure is **NOT** `std::variant`; In fact, it is quite the opposite! `std::variant` is a closed set of types with open set of operations whereas type erasure is an open set of types with closed set of operations.
 
+This is the solution used in the standard library for `std::function`. `std::function` can store any callable type like function pointers, lambda expressions, bind expressions etc. and provide a uniform interface to call them. This is achieved using type erasure.
+
 ### What is Type Erasure then?
 Type erasure is:
 - a templated constructor plus
-- a completely non-virtual interface;
+- a completely non-virtual interface while hiding virtual dispatch behind a stable boundary;
 - a combination of 3 clever design patterns:
     1. **External Polymorphism**
     2. **Bridge Pattern**
@@ -281,7 +283,6 @@ class Shape {
 private:
     struct ShapeConcept {
         virtual ~ShapeConcept() = default;
-        virtual std::unique_ptr<ShapeConcept> clone() const = 0;
         virtual void draw(/* ... */) const = 0;
         virtual void serialize(/* ... */) const = 0;
         virtual std::unique_ptr<ShapeConcept> clone() const = 0;
@@ -324,10 +325,13 @@ template <typename T>
 concept Drawable = requires(T obj) {
     { draw(obj /*, ... */) } -> std::same_as<void>;
 };
+
 template <typename T>
 concept Serializable = requires(T obj) {
     { serialize(obj /*, ... */) } -> std::same_as<void>;
 };
+
+template <typename T>
 concept Shapelike = Drawable<T> && Serializable<T>;
 class Shape {
 private:
@@ -339,15 +343,69 @@ public:
     //...
 };
 ```
-### Summary
+### Injecting strategies
+One limitation of the above implementation is that the operations like `draw()` and `serialize()` are fixed. We can only use one library implementation in a single file. Well, to change this, let's just add another template parameter to the `ShapeModel` class that represents the strategy for the operations. Now, we won't modify the `ShapeModel` class but create another class `ExtendedShapeModel` that inherits from `ShapeConcept`.
+```cpp
+class Shape {
+private:
+    struct ShapeConcept {
+        //...
+    };
+    template <typename T, typename DrawStrategy>
+    struct ExtendedShapeModel : ShapeConcept {
+        T object;
+        DrawStrategy drawStrategy;
+        //...
+        ExtendedShapeModel(T obj, DrawStrategy ds) 
+            : object{std::move(obj)}, drawStrategy{std::move(ds)} {}
+        void draw(/* ... */) const override {
+            drawStrategy.draw(object /*, ... */);
+        }
+        //...
+    };
+    //...
+public:
+    template<typename T, typename DrawStrategy>
+                    requires Shapelike<T> && DrawableStrategy<DrawStrategy, T> // assume DrawableStrategy concept is defined
+    Shape(T obj, DrawStrategy ds) 
+        : shapePtr{std::make_unique<DrawableShapeModel<T, DrawStrategy>>(std::move(obj), std::move(ds))} {}
+    //...
+};
+```
+Here, the `ExtendedShapeModel` class takes an additional template parameter `DrawStrategy` which represents the strategy for the `draw()` operation. We can directly use this `ExtendedShapeModel` class instead of our previous `ShapeModel` class with some default strategy for `draw()`. This allows the users to inject the strategy they want to use for the operations. Similarly, we can add template parameters for other operations like `serialize()` as well. Now, the user can create a `Shape` object with a specific strategy for the operations like this:
+```cpp
+int main() {
+    OpenGLDrawStrategy openglDrawStrategy;
+    VulkanDrawStrategy vulkanDrawStrategy;
+    Shape circleShape(Circle{5.0}, openglDrawStrategy);
+    Shape squareShape(Square{4.0}, vulkanDrawStrategy);
+    Shape testcircle(Circle{3.0}, [/* lambda draw strategy */](const Circle& c /*, ... */) {
+        // Custom drawing code for Circle
+    });
+    circleShape.draw(/* ... */);
+    squareShape.draw(/* ... */);
+    return 0;
+}
+```
+#### Have we come full circle?
+Well, not really! We are currently at much better place to be using template-based strategy pattern. If we would have tried to do so earlier, we would fail to store each instantiated template type in a single container as there is no abstraction covering it. But now, we have that abstraction in the form of `ShapeConcept` and `Shape` class. Thus, we can now use template-based strategies without any issues.
+
+### Conclusion
 ![type-erase-sol](../images/type-erasure/type-erase-sol.png)
 As we can see in the above architecture diagram, the `Shape` class acts as a wrapper and abstraction for the different shape types. It contains a pointer to the `ShapeConcept` which defines the interface for the operations that can be performed on the shapes. 
 
 One level below this, we have all the different kinds of shapes like `Circle`, `Square` etc. These are totally independent of each other, don't know about each other's existence, don't know what operations can be performed on them and have zero knowledge about the level above them and below them. Now, these can be presented at any level but for the sake of clarity, we put them here. 
 
-Now, we need to combine all of these. This happens with `draw()` implementation. This happens with the help of templated constructor of `ShapeModel` which acts as a bridge between the two levels and we don't need to create those classes for each shape as the compiler itself generates them for us. Thus, we have very loose coupling between the different levels.
+Now, we need to combine all of these. This happens with `draw()` implementation. This happens with the help of templated constructor of `ShapeModel` which acts as a bridge between the two levels and we don't need to create those classes for each shape as the compiler itself generates them for us. Thus, we have very loose coupling between the different levels. Just to say, I have omitted the templated strategy implementation here for the sake of clarity. Keep in mind that the `ShapeModel` class can be replaced with `ExtendedShapeModel` class for strategy injection.
 
-In this blog, we have concentrated on design perspective and thus I must admit that there are a lot of performance optimizations that can be done to this design. For example, we can use `small buffer optimization` to avoid heap allocations for small objects. These optimizations are out of the scope of this blog but I would recommend the readers to look into them.
+But do note that there are a few trade-offs, not bad but trade-offs nonetheless:
+1. **Harder to debug:** When something goes wrong with `draw(Shape)`, we no longer know what you're drawing without instrumentation. We have traded **structural transparency** for **architectural flexibility**.
+2. **Misleading error messages:** Without `concepts`, the error messages become unreadable fast.
+3. **Optimization visibility:** Inlining across erased boundaries is harder. Sometimes, compile may win. Sometimes, it won't.
+4. **Semantic opacity:** With inheritance model, behaviour is discoverable via type graph. With type erasure, behaviour is discoverable via construction site. This shifts the cognitive load from "what is this object?" to "how was this object constructed?". Again, not bad but different.
+
+In this blog, we have concentrated on design perspective and there is no focus on performance whatsoever. Our entire focus is on creating a flexible and maintainable design. 
+Hence, the performance may not be any better than classic object oriented approach! But it is not the end of line. We still have significant opportunities for doing some clever optimizations to increase performance. For example, we can use `small buffer optimization` to avoid heap allocations for small objects. These optimizations are out of the scope of this blog but I would recommend the readers to look into them.
 ## References
 1. [Design Patterns: Elements of Reusable Object-Oriented Software](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612) by Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides
 2. [Breaking Dependencies: Type Erasure - A Design Analysis](https://youtu.be/4eeESJQk-mw?si=aOFHcYz2ygJMNv0r)
