@@ -10,6 +10,8 @@ readingTime = true
 comments = true
 keywords = ["c++", "design patterns", "type erasure", "external polymorphism", "bridge pattern", "prototype pattern", "strategy pattern"]
 +++
+> *Change is the enemy of the perfect design.*
+
 Recently, I had been involved in an implementation-heavy project where we had to design the architecture for a few components. It is my first project of this scale and we had quite the hard deadlines. We ended up using not so elegant solutions to get things done quickly. This did not satisfy me and I knew there should be better ways of doing things. Hence, I started researching for solutions and came across the concept of Type Erasure in C++. `Klaus Iglberger` has a great talk on this topic. I would like to share my understanding of Type Erasure through this blog post.
 
 ## The Problem
