@@ -7,6 +7,7 @@ cover = ""
 coverCaption = ""
 description = "This is the first blog in the series of dynamic allocators explaining the basic essence of dynamic memory allocation"
 readingTime = true
+comments = true
 keywords = ["OS", "dynamic allocator"]                          
 +++
 

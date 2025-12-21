@@ -7,6 +7,7 @@ cover = ""
 coverCaption = ""
 description = "A short writeup for Be Fast challenge from Mapna CTF 2024"
 readingTime = true
+comments = true
 keywords = ["MapnaCTF","Cryptography","DES"]
 +++
 # Be Fast

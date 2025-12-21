@@ -6,6 +6,7 @@ cover = ""
 coverCaption = "Always zero-out memory"
 description = "An explained solution to xv6 syscall-lab's final task"
 readingTime = true
+comments = true
 keywords = ["xv6", "OS", "memory"]
 date = '2025-01-01T19:23:33+05:30'
 +++
