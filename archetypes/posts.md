@@ -8,5 +8,6 @@ cover = ""
 coverCaption = ""
 description = ""
 readingTime = true
+comments = true
 keywords = []
 +++
