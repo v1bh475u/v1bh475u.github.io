@@ -63,6 +63,18 @@ math = true
 # dismissible = false
 # text = "Check it out on GitHub"
 # url = "https://github.com/mirus-ua/hugo-theme-re-terminal"
+[params.giscus]
+enabled = true
+repo = "v1bh475u/v1bh475u.github.io"
+repoID = "R_kgDON9sUUw"
+category = "Announcements"
+categoryID = "DIC_kwDON9sUU84C0FKK"
+mapping = "pathname"
+reactionsEnabled = "1"
+emitMetadata = "0"
+inputPosition = "top"
+theme = "dark_dimmed"
+lang = "en"
 
 
 [params.twitter]
