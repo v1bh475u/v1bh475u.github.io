@@ -387,8 +387,9 @@ int main() {
     return 0;
 }
 ```
+
 #### Have we come full circle?
-Well, not really! We are currently at much better place to be using template-based strategy pattern. If we would have tried to do so earlier, we would fail to store each instantiated template type in a single container as there is no abstraction covering it. But now, we have that abstraction in the form of `ShapeConcept` and `Shape` class. Thus, we can now use template-based strategies without any issues.
+Well, not really! We can actually use the template-based Strategy Pattern and it can work to some extent but we are currently at much better place to be using template-based strategy pattern. If we would have tried to do so earlier, we would fail to reason about the design. By our design, we would fail to conclude that `Circle<OpenGLDrawStrategy>` and `Circle<VulkanDrawStrategy>` that differ only in strategy are same. They will be treated as fundamentally different types! Also, not to forget, the value semantics are still missing with this approach. But with type erasure, we have a clean separation of concerns and can reason about the design much better. The public API is much cleaner, easier to use and stable while we have separated the more volatile aspects- the implementation details - behind a stable boundary. This allows us to change the implementation details without affecting the public API.
 
 ### Conclusion
 ![type-erase-sol](../images/type-erasure/type-erase-sol.png)
