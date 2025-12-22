@@ -1,3 +1,4 @@
+{{ if and (.Site.Params.giscus.enabled) (ne .Params.comments false) }}
 <script src="https://giscus.app/client.js"
         data-repo="v1bh475u/v1bh475u.github.io"
         data-repo-id="R_kgDON9sUUw"
@@ -14,3 +15,4 @@
         crossorigin="anonymous"
         async>
 </script>
+{{ end }}
