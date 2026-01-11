@@ -5,7 +5,7 @@ languageCode = "en-us"
 theme = "re-terminal"
 pagination.pagerSize = 5
 title = "vibhatsu's blog"
-
+enableRobotsTXT = true
 canonifyURLs = true
 [params]
 # dir name of your main content (default is `content/posts`).
