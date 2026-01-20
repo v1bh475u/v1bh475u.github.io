@@ -5,12 +5,4 @@ comments = false
 
 ## About Me
 
-Hi! I'm `vibhatsu`, a student at IIT Roorkee who enjoys exploring technology. I'm particularly interested in understanding how computers work at a fundamental level.
-
-My explorations have led me to develop a keen interest in low-level programming, systems programming and security. I'm also interested in learning about the design and implementation of programming languages.
-
-Currently, I am learning about compilers and ebpf.
-
-I am a big fan of open-source software and I try to contribute to projects whenever I can. I also enjoy writing about my experiences and learnings on this blog.
-
-You can find more about me at [GitHub](https://github.com/v1bh475u) and my [resume](../about/Resume.pdf).
+Hi, I’m Maulik Barot (aka `vibhatsu`), a Computer Science undergrad at IIT Roorkee. I’m passionate about understanding computers at the lowest level – building compilers, debuggers, and efficient systems. My interests lie in low-level programming, reverse engineering, and security. For example, I’ve developed a custom RISC-V compiler and created a Linux debugger from scratch. I actively contribute to open-source projects (such as enhancing **Mandiant’s capa** framework) and enjoy applying my skills in competitions (top-5 finishes in multiple global CTFs). Currently, I’m diving deeper into performance-oriented topics like lock algorithms and **eBPF**. I also write technical blogs to share what I learn. Connect with me on [GitHub](https://github.com/v1bh475u) or [LinkedIn](https://www.linkedin.com/in/maulik-barot-3855622a6/) to see more of my work.
