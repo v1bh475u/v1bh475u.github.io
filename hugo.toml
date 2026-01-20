@@ -16,7 +16,7 @@ contentTypeName = "posts"
 themeColor = "green"
 
 # if you set this to 0, only submenu trigger will be visible
-showMenuItems = 2
+showMenuItems = 3
 
 # show selector to switch language
 showLanguageSelector = false
@@ -119,10 +119,17 @@ logoHomeLink = "/"
 identifier = "about"
 name = "About"
 url = "/about"
+weight = 1
 [[languages.en.menu.main]]
 identifier = "showcase"
 name = "Showcase"
 url = "/showcase"
+weight = 2
+[[languages.en.menu.main]]
+identifier = "resume"
+name = "Resume"
+url = "/resume.pdf"
+weight = 3
 
 [module]
 # In case you would like to make changes to the theme and keep it locally in you repository,
