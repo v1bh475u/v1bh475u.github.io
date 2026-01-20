@@ -3,29 +3,30 @@ title = 'Showcase'
 comments = false
 +++
 
-## [fenris](https://github.com/v1bh475u/fenris)
-- Built a distributed file system with thread-safe caching and synchronized concurrent access.
-- Implemented ECDH-based key exchange and AES-GCM encryption for secure communication.
-- Added Zlib compression and an LRU cache layer to improve throughput.
-- Designed Protobuf-based message protocol for client-server interaction.
-- Tools Used: C++, CMake, GitHub Actions, Protobuf, CryptoPP, zlib, spdlog
+### **cielc** ([GitHub](https://github.com/v1bh475u/ciel))
+Custom RISC-V compiler. Built front-end (Flex/Bison) and generated optimized intermediate code supporting classes, inheritance, and lambdas. Implemented linear-scan register allocation for speed. *(Tech: C++, RISC-V ISA, Flex/Bison).*
 
-## [cielc](https://github.com/v1bh475u/ciel)
-- Developed a full compiler translating a custom C++-like language to RISC-V assembly
-- Built the front-end (lexer, parser, semantics) using Flex and Bison.
-- Generated optimized 3AC supporting classes, inheritance, lambdas and automated lifetime handling.
-- Tools Used: C++, CMake, GitHub Actions, Flex, Bison, RISC-V Docs
+---
 
-## [Debugger](https://github.com/v1bh475u/Debugger)
-- Designed and implemented a custom debugger for Linux binaries from scratch in modern C++, leveraging
-the ptrace system call for process control and debugging, similar to its use in GNU Debugger. The project
-includes a structured design with proper namespace management to ensure maintainability and scalability.
-- Tools Used: C++, Linux ManPages
+### **fenris** ([GitHub](https://github.com/v1bh475u/fenris))
+Networked file system with thread-safe caching and encrypted communication. Implemented ECDH key exchange and AES-GCM for security, added zlib compression and LRU caching for throughput, and used Protobuf for messaging. *(Tech: C++, Protobuf, CryptoPP, zlib).*
 
-## [gbemu](https://github.com/sdslabs/gbemu)
-- Refactored APU subsystem to separate synthesis logic from callbacks.
-- Implemented accurate timing and channel mixing following Pan Docs specs.
-- Improved maintainability with clearer subsystem boundaries.
-- Tools Used: C++, SDL2, Pan Docs
+---
+
+
+### **spinlock benchmark** ([GitHub](https://github.com/v1bh475u/spinlock_benchmark))
+Implemented multiple spinlock algorithms (CAS loop and ticket lock) in C++ and built a Google Benchmark suite to compare their performance under contention. This project measures throughput/latency against std::mutex to analyze synchronization efficiency. *(Tech: C++, `<atomic>`, Google Benchmark, CMake).*
+
+---
+
+### **mydbg** ([GitHub](https://github.com/v1bh475u/mydbg))
+Custom debugger using `ptrace`. Implemented breakpoints, symbol resolution, register/memory inspection akin to gdb. Emphasized modular design for maintainability. *(Tech: C++, Linux `ptrace` API).*
+
+---
+
+### **gbemu** ([GitHub](https://github.com/sdslabs/gbemu))
+Game Boy emulator (audio subsystem). Refactored audio unit to separate logic, implemented cycle-accurate timing and channel mixing per Pan Docs, improving code clarity. *(Tech: C++, SDL2).*
+
+---
 
 
