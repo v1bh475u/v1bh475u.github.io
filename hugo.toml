@@ -7,6 +7,9 @@ pagination.pagerSize = 5
 title = "vibhatsu's blog"
 enableRobotsTXT = true
 canonifyURLs = true
+[Author]
+  name = "vibhatsu"
+  email = "maulikbarot2915@gmail.com"
 [params]
 # dir name of your main content (default is `content/posts`).
 # the list of set content will show up on your index page (baseurl).
@@ -83,6 +86,10 @@ lang = "en"
 # do not include @
 creator = "PTRACE_TRACEME"
 site = ""
+
+[params.author]
+  name = "vibhatsu"
+  email = "maulikbarot2915@gmail.com"
 
 [languages]
 [languages.en.params]
