@@ -116,7 +116,7 @@ With the ritual purification done, here was the first sweep.
 ## The First Plot Did Not Cooperate
 
 This baseline sweep used fresh allocations per working-set size, with normal `4 KiB` pages, 30 repetitions per point, and median cycles/access as the headline number.
-![Baseline cache latency sweep](../images/cache-walk/cache_latency.png)
+![Baseline cache latency sweep](../images/cache-walk/cache_latency.svg)
 
 The L1 and L2 regions are pretty clear. The sequential chain stays low because it is a weak latency probe: it gives the hardware a predictable stream. The random dependent chain is the meaningful curve here. It serializes the load stream because each address depends on the previous load result.
 
@@ -131,7 +131,7 @@ At this point I did not know whether the benchmark was bad, the graph was mislea
 
 Random pointer chasing over a lot of 4 KiB pages is a good way to stress the TLB as well as the data cache. If translation overhead is doing most of the damage, larger pages should help because each TLB entry covers more memory and page walks become rarer. So I reran the sweep with three page modes: plain 4 KiB pages, THP-requested mappings, and explicit 2 MiB huge pages.
 
-![Layout vs capacity](../images/cache-walk/layout_capacity.png)
+![Layout vs capacity](../images/cache-walk/layout_capacity.svg)
 
 So, huge pages did help but not in the way I expected. It does flatten out the curve but only on the top end! It reduces the latencies but does not change the shape of the curve and we are still stuck with the cliff.
 
@@ -144,7 +144,7 @@ The next suspicious thing was address placement.
 Maybe my benchmark was hitting some weird aliasing problem causing it to thrash in the LLC. So, I tried sweeping the virtual offset of the pointer chase. The idea was that if some offsets were unlucky, I could find a better one and see a plateau.
 
 I allocated a chunk of size `working_set + max_offset` and shifted the chase start across the offset range.
-![Offset sweep heatmap](../images/cache-walk/offset_heatmap.png)
+![Offset sweep heatmap](../images/cache-walk/offset_heatmap.svg)
 
 I observed significant variation in latency for offset sweep from `3 MiB` to `8 MiB` but the differences were not large enough to explain the cliff. Also, we can see a huge drop in latency for `6-7 MiB`. However, the observation is not at all persistent. I used to find much of such strangely low latencies for one or two working sets.
 
@@ -198,7 +198,7 @@ Then I ran the experiment that actually changed the story. In one version, each 
 
 The result:
 
-![Fresh mappings vs same physical prefix](../images/cache-walk/l3_fresh_vs_same_prefix.png)
+![Fresh mappings vs same physical prefix](../images/cache-walk/l3_fresh_vs_same_prefix.svg)
 
 This was the first result that really broke the “size alone explains the cliff” model. The fresh-allocation runs picked up L3 misses much earlier, while prefixes of one fixed backing stayed well-behaved for longer. So working-set size was not the only variable anymore.
 
@@ -248,7 +248,7 @@ So, now, we have our hypothesis: The early L3 cliff is probably hidden by OS fra
 ## The Moment of Truth
 So I tested that prediction directly. I allocated one `32 MiB` explicit-huge buffer, measured prefixes of that same backing, and reran the original latency sweep with PMU counters. I also did these runs immediately after a reboot, when the system was more likely to hand out less fragmented physical memory. If backing layout was really the missing variable, this should recover a cleaner LLC regime.
 
-![32 MiB explicit huge page run](../images/cache-walk/the-plateau.png)
+![32 MiB explicit huge page run](../images/cache-walk/the-plateau.svg)
 
 Finally, after so much digging, we finally observe the plateau (partially)! Well, it does rise up a bit quickly but I would give that to the shared nature of L3. There are random processes interacting with the memory and so some of our accesses might be getting evicted by other processes and this becomes significant when we are pushing towards the limit of the cache.
 
