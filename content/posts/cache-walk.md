@@ -16,7 +16,8 @@ Textbook cache-latency plots make memory look annoyingly well-behaved: grow the 
 
 ## My Beautiful Machine
 
-My CPU was an `Intel Core i5-12450HX`. I ran the benchmark on logical CPU `7`, which is one SMT sibling on a P-core, and kept logical CPU `6` offline during the runs.
+My CPU was an `Intel Core i5-12450HX`. I ran the benchmark on logical CPU `7` and kept its SMT sibling, logical CPU `6`, offline during the runs. The caches belong to the physical P-core, not to logical CPU. When both hyperthreads on a core are active, they issue loads and stores on the same L1 and L2 thus potentially evicting lines for each other. Thus, the SMT sibling needs to be offline.
+
 System summary:
 | Category         |                                   Value |
 | ---------------- | --------------------------------------: |
@@ -24,18 +25,19 @@ System summary:
 | Core topology    |       4 P-cores + 4 E-cores, 12 threads |
 | Measurement CPU    |               P-core, logical CPU `7` |
 | SMT sibling      |      logical CPU `6`, kept offline |
-| L1D [P-core]| 48 KiB, 12-way, 64 B line |
-| L2 [P-core]| 1.25 MiB private, 10-way |
-| LLC| 12 MiB shared, 8-way |
+| L1D [P-core]     | 48 KiB, 12-way, 64 B line |
+| L2 [P-core]       | 1.25 MiB private, 10-way |
+| LLC              | 12 MiB shared, 8-way |
 | Kernel           | 7.0.11-zen1-1.1-zen |
 | Compiler         |                   g++ 16.1.1|
 | Frequency policy |    performance governor, turbo disabled |
-| Pages tested     |     4 KiB, THP-requested, explicit 2 MiB huge pages |
+| Pages tested     |     4 KiB, THP-requested, explicit `2 MiB` huge pages |
 
 The P-core cache numbers are the relevant ones here because the benchmark was pinned to a P-core. The E-core cache arrangement is different, but it is not part of this measurement path.
 
 ## Precautions and Setup
-Before we can even begin, we need to do a **LOT** of isolation and cleaning if we want minimal noise in our measurements.
+Before any of this is worth trusting, I had to do a lot of isolation and cleaning to keep the noise down.
+
 ### The Compiler
 Microbenchmarks are easy to accidentally optimize into nonsense, so the chase loop has to remain a real dependency chain and the final pointer has to stay live. Each load produces the address of the next load, and I also escape the final pointer through an empty inline-asm block so the compiler cannot treat the loop as dead code.
 
@@ -48,8 +50,9 @@ Microbenchmarks are easy to accidentally optimize into nonsense, so the chase lo
 ```
 
 ### The OS
-The OS can do a lot of shenanigans to destroy our measurements. 
-It can pre-empt our program or migrate it to some other core, so I pinned my program to logical core `7`, offlined its SMT sibling logical CPU `6`, forced the `performance` governor, and disabled turbo. How I achieved this can be found in the repository scripts [here](https://github.com/v1bh475u/cache-walk/blob/master/scripts/apply_isolation.sh). I still repeated the experiment at least 30 times and used medians though.
+The OS can do a lot of shenanigans to destroy my measurements. 
+
+It can pre-empt my program or migrate it to some other core, so I pinned my program to logical core `7`, offlined its SMT sibling logical CPU `6`, forced the `performance` governor, and disabled turbo. How I achieved this can be found in the repository scripts [here](https://github.com/v1bh475u/cache-walk/blob/master/scripts/apply_isolation.sh). I still repeated the experiment at least 30 times and used median as a hedge.
 
 ### The hardware
 Timing short regions on x86 is its own small circus. I bracketed the chase loop with `lfence; rdtsc` at the start and `rdtscp; lfence` at the end.
@@ -124,50 +127,48 @@ That was exactly why I wanted it. The benchmark should expose the latency ladder
 
 The problem was not just “no neat plateau.” The random dependent curve started climbing around `4 MiB` and was already near `200 cycles/access` by `8 MiB`, which is uncomfortably early for a `12 MiB` shared LLC.
 
-
 At this point I did not know whether the benchmark was bad, the graph was misleading, the CPU was doing something subtle, or I had misunderstood the mental model. The first obvious suspect was translation overhead: random pointer chasing over a lot of small pages is exactly how you make a TLB miserable.
 
 ## Maybe It Was TLB Pressure
 
-Random pointer chasing over a lot of 4 KiB pages is a good way to stress the TLB as well as the data cache. If translation overhead is doing most of the damage, larger pages should help because each TLB entry covers more memory and page walks become rarer. So I reran the sweep with three page modes: plain 4 KiB pages, THP-requested mappings, and explicit 2 MiB huge pages.
+Random pointer chasing over a lot of 4 KiB pages is a good way to stress the TLB as well as the data cache. If translation overhead is doing most of the damage, larger pages should help because each TLB entry covers more memory and page walks become rarer. So I reran the sweep with three page modes: plain 4 KiB pages, THP-requested mappings, and explicit `2 MiB` huge pages.
 
 ![Layout vs capacity](../images/cache-walk/layout_capacity.svg)
 
-So, huge pages did help but not in the way I expected. It does flatten out the curve but only on the top end! It reduces the latencies but does not change the shape of the curve and we are still stuck with the cliff.
+So, huge pages did help but not in the way I expected. It did flatten out the curve but only on the top end! It reduced the latencies but did not change the shape of the curve and I was still stuck with the cliff.
 
 So if the problem was not mostly translation overhead, the next suspect was placement.
 
 ## Maybe It Was Offset Weirdness
-
-The next suspicious thing was address placement.
 
 Maybe my benchmark was hitting some weird aliasing problem causing it to thrash in the LLC. So, I tried sweeping the virtual offset of the pointer chase. The idea was that if some offsets were unlucky, I could find a better one and see a plateau.
 
 I allocated a chunk of size `working_set + max_offset` and shifted the chase start across the offset range.
 ![Offset sweep heatmap](../images/cache-walk/offset_heatmap.svg)
 
-I observed significant variation in latency for offset sweep from `3 MiB` to `8 MiB` but the differences were not large enough to explain the cliff. Also, we can see a huge drop in latency for `6-7 MiB`. However, the observation is not at all persistent. I used to find much of such strangely low latencies for one or two working sets.
+I saw some noise in the `3–8 MiB` offset sweep, but the actual ratios were tiny — 1.00x to 1.03x across every size and mode I tested. So, it's fair to conclude that this is just noise and nothing more.
 
 | Size | Mode | Offset pair | Cycle/access Medians | Ratio |
 | ---: | --- | ---: | ---: | ---: |
-| 3 MiB | 4 KiB | 1024 vs 8192 | 76.11 vs 76.00 | 1.00x |
-| 3 MiB | huge | 64 vs 2048 | 69.62 vs 69.74 | 1.00x |
-| 8 MiB | 4 KiB | 128 vs 32768 | 229.09 vs 231.07 | 1.01x |
-| 8 MiB | huge | 1024 vs 65536 | 216.14 vs 210.84 | 1.03x |
-| 8 MiB | THP-requested | 1024 vs 16384 | 212.26 vs 207.37 | 1.02x |
+| `3 MiB` | 4 KiB | 1024 vs 8192 | 76.11 vs 76.00 | 1.00x |
+| `3 MiB` | huge | 64 vs 2048 | 69.62 vs 69.74 | 1.00x |
+| `8 MiB` | 4 KiB | 128 vs 32768 | 229.09 vs 231.07 | 1.01x |
+| `8 MiB` | huge | 1024 vs 65536 | 216.14 vs 210.84 | 1.03x |
+| `8 MiB` | THP-requested | 1024 vs 16384 | 212.26 vs 207.37 | 1.02x |
 
 As you see, the differences were small and definitely not enough to explain the massive jumping cliff.
 
 ## Latency Was Not Enough
-So far, we have been relying on latency only to get our answers but I realized that we need to get our hands dirty and look at the PMU counters to get a better picture of what is going on.
 
-Cycles per access can tell me that something got slower, but it does not say why. The benchmark would warm the chain, start counters, run the chase, stop counters, and normalize by the number of dependent loads. I didn't need to know everything but only a few key metrics:
+So far, I have been relying on latency only to get my answers but I realized that I need to get my hands dirty and look at the PMU counters to get a better picture of what is going on.
+
+Cycles per access can tell me that something got slower, but it does not say why. The benchmark would warm the chain, start counters, run the chase, stop counters, and normalize by the number of dependent loads. I didn't need everything — just a few key metrics:
 - L2 miss event:  `l2_rqsts.demand_data_rd_miss`
 - L3 hit event:   `mem_load_retired.l3_hit`
 - L3 miss event:  `mem_load_retired.l3_miss`
 - DTLB walks:     `dtlb_load_misses.walk_completed`
 
-I made sure to reset these counters for each dependent loop run and for calculating the per-access values, I used the following formula:
+I reset these counters before every run. To compute per-access values, I used:
 
 ```
 dependent_loads = #nodes in the pointer chase * iterations
@@ -179,22 +180,22 @@ Once I had ROI counters, the mystery got sharper. One explicit-huge sweep looked
 
 | Size | Cycles/access | L2 miss/access | L3 hit/access | L3 miss/access |
 | ---: | ---: | ---: | ---: | ---: |
-| 3 MiB | 93.12 | 0.992517 | 0.805861 | 0.187899 |
-| 4 MiB | 186.89 | 0.994819 | 0.366281 | 0.627930 |
-| 5 MiB | 240.00 | 0.996566 | 0.144992 | 0.851131 |
-| 7 MiB | 262.05 | 0.997888 | 0.017357 | 0.979984 |
-| 8 MiB | 240.75 | 0.998416 | 0.105952 | 0.892009 |
-| 12 MiB | 178.67 | 0.998891 | 0.353601 | 0.645162 |
+| `3 MiB` | 93.12 | 0.992517 | 0.805861 | 0.187899 |
+| `4 MiB` | 186.89 | 0.994819 | 0.366281 | 0.627930 |
+| `5 MiB` | 240.00 | 0.996566 | 0.144992 | 0.851131 |
+| `7 MiB` | 262.05 | 0.997888 | 0.017357 | 0.979984 |
+| `8 MiB` | 240.75 | 0.998416 | 0.105952 | 0.892009 |
+| `12 MiB` | 178.67 | 0.998891 | 0.353601 | 0.645162 |
 
-So, the reason we are seeing a cliff is actually because there **is** a rapid increase in L3 misses and we are measuring the average latency of a mix of hits and misses. What mattered here was not some exact threshold, but the shape: the L3 miss fraction was jumping much earlier and much harder than I expected for a usable LLC regime. So, something is making the L3 miss fraction jump very early and very hard.
+So, the cliff appears because there **is** a rapid increase in L3 misses, and the measured latency is the average of a mix of hits and misses. The L3 miss fraction was jumping much earlier than I expected for a usable LLC regime. So, something is making the L3 miss fraction jump very early.
 
-I noticed that on some of the runs, `12 MiB` had a lower (though still very high) L3 miss fraction than `8 MiB`. That was a hint that the working set size alone was not the only variable. Something else was at work. It could be due to other processes interfering as L3 is shared but I was suspicious because the same pattern repeated across multiple runs.
+I noticed that on some of the runs, `12 MiB` had a lower (though still very high) L3 miss fraction than `8 MiB`. That was a hint that the working set size alone was not the only variable. Something else was at work. It could have been other processes interfering, since the LLC is shared across cores. But the same pattern repeating across runs made me suspicious of something simpler.
 
-That suggested a new missing variable: not just **how much** memory I touched, but **which physical pages** I got.
+That suggested a new missing variable: it is not just **how much** memory I touched, but **which physical pages** I got.
 
-## The Plot That Changed The Investigation
+## False Hope
 
-Then I ran the experiment that actually changed the story. In one version, each working-set size got a fresh allocation. In the other, I allocated one larger buffer and measured prefixes of that same backing: first `3 MiB`, then `4 MiB`, then `5 MiB`, and so on. Same pointer-chase logic, same page mode, same PMU setup; only the backing strategy changed.
+Then I ran an experiment that seemed like a turning point. In one version, each working-set size got a fresh allocation. In the other, I allocated one larger buffer and measured prefixes of that same backing: first `3 MiB`, then `4 MiB`, then `5 MiB`, and so on. Same pointer-chase logic, same page mode, same PMU setup; only the backing strategy changed.
 
 The result:
 
@@ -202,62 +203,142 @@ The result:
 
 This was the first result that really broke the “size alone explains the cliff” model. The fresh-allocation runs picked up L3 misses much earlier, while prefixes of one fixed backing stayed well-behaved for longer. So working-set size was not the only variable anymore.
 
-At that point I had one obvious suspect left: some kind of slice imbalance.
+Just for my own sanity, I rebooted the machine once again and re-ran the experiment...
 
-## A Slice Sanity Check
-Textbook cache models assume a monolithic block of memory partitioned neatly into sets and ways. Real silicon does not work that way. A monolithic 12 MiB cache would be a massive bottleneck, so modern Intel CPUs physically divide the LLC into separate chunks called "slices," each managed by an uncore component called a C-Box.
+![No difference in fresh vs same physical prefix](../images/cache-walk/fresh_vs_same_fail.svg)
+Now, there seems to be absolutely no difference at all between the two! I ran the experiment a couple of times and the results got worse in terms of higher miss fraction but there seemed to be little to no gap between the two!
 
-When a core requests a physical address, the CPU routes it through an undocumented, proprietary hash function. This hash dictates exactly which physical slice owns that cache line, completely orthogonal to standard set indexing. The goal is to distribute traffic evenly across the silicon fabric.
+So, it is not the fresh vs same mapping prefix. However, I noticed another trend. Whenever I ran the experiment directly after boot, both showed significantly lower L3 misses up to `10 MiB` at the very least.
 
-This gave me my prime suspect: Slice Aliasing. What if my physical allocations were just astronomically unlucky? If the OS handed me physical pages that all happened to hash into the exact same C-Box, my benchmark would hammer a single slice to death while the rest of the 12 MiB cache sat empty.
+So, just to check, I decided to do the following: 
 
-To sanity-check that idea, I took `128` fresh `8 MiB` explicit-huge mappings with per-CBox lookup data and compared simple slice-balance metrics against L3 miss fraction. Translation overhead was already negligible here, so this was a clean LLC-level check.
+I rebooted again, disabled the prefetchers, allocated one explicit `32 MiB` HugeTLB-backed region, and measured prefixes of that same mapping.
 
-Then I compared slice-balance metrics against L3 miss fraction:
+## Reboot and Redemption
 
-| Slice metric | Spearman rho vs L3 miss fraction | Low-miss quartile median | High-miss quartile median |
+![The plateau](../images/cache-walk/the-plateau.svg)
+
+There it is — the plateau. From roughly `2 MiB` to `8 MiB` the curve stays low and flat before it starts climbing.
+
+It does start rising a little before the actual `12 MiB` LLC capacity, which is probably just the live OS sharing the cache with everything else on the machine — evicting my lines as my working set gets close to the full LLC size.
+
+Now, I am curious about this:
+
+> Why the heck was this not seen in the first experiment?
+
+The previous section showed that backing strategy did not produce the split I was looking for. That left two plausible variables: post-boot memory state and prefetcher state. Immediately after a reboot, the allocator might hand the benchmark relatively uncontended physical memory because most of it is still unused, producing a cleaner spread across cache sets. I could not prove that yet.
+
+So, I decided to focus on prefetcher state.
+
+## Maybe It Was The Prefetchers
+
+This was a nice suspect because it sounded plausible and required only one knob to test.
+
+Even though this was a dependent random pointer chase, CPUs are annoying enough that I did not want to just say “random means no prefetching” and move on.
+
+So I ran paired tests on the same mappings:
+
+```text
+prefetch ON -> prefetch OFF -> prefetch ON
+```
+
+The point was simple. If prefetchers were responsible for the missing plateau, turning them on and off should move the result in one consistent direction.
+
+Welp. It did not.
+
+The sign kept changing across mappings. At the same size, prefetchers sometimes made things slower and sometimes made things faster. The medians leaned slightly toward “prefetchers hurt” in some runs, but the individual mappings did not obey that story.
+
+The cleaner signal was in the offset-window pass with prefetchers disabled. Even with prefetchers out of the way, different `8 MiB` windows inside a `32 MiB` mapping still behaved very differently.
+
+| Run | Fastest `8 MiB` window | Slowest `8 MiB` window | Spread |
 | --- | ---: | ---: | ---: |
-| max share | 0.214 | 0.325 | 0.350 |
-| top2 share | -0.404 | 0.565 | 0.518 |
-| max/mean | 0.214 | 1.949 | 2.102 |
-| coefficient of variation | -0.281 | 0.526 | 0.512 |
-| normalized entropy | 0.538 | 0.933 | 0.938 |
+| Run 1 | 54.62 cyc/access | 72.55 cyc/access | 17.93 |
+| Run 2 | 54.11 cyc/access | 72.17 cyc/access | 18.06 |
+| Run 3 | 54.52 cyc/access | 70.25 cyc/access | 15.73 |
+| Run 4 | 54.27 cyc/access | 75.63 cyc/access | 21.36 |
 
-Using `abs(rho) >= 0.60` as a coarse “this actually looks strong” cutoff, nothing here qualified. High-miss mappings were not dramatically more concentrated than low-miss ones either. Slice imbalance might contribute noise, but it did not look like the main driver.
+That is too large to ignore.
 
-## The Great Revelation
+If prefetchers were the main reason, disabling them should have made the mapping behave uniformly. But nope! Some windows still looked LLC-ish. Some still looked much worse.
 
-Ok. This is super weird. Plain set pressure is not enough to explain the split, and slice imbalance did not rescue the story either. But the gap between fresh mappings and same-prefix runs is still right there. Why?
+So prefetchers were not the answer. They could disturb the measurement, but they were not deciding whether the plateau appeared.
 
-After a lot of rambling, I started to think backwards. What would make cache sets hold up massive memory? The addresses should have a nice spread across the sets rather than stacking up and self-evicting. 
+So, I was kinda stuck here with no answers. But the spread in the `8 MiB` window numbers made me want to stop trusting the median and actually plot every single run.
 
-I started wondering what physical layout would naturally result in a clean spread. The most obvious answer is just sequential, contiguous physical memory. If physical addresses just increment nicely, they sweep across the cache sets sequentially instead of stepping on each other's toes.
+## The Democracy Lies
 
-But how does this happen with our same backing prefix run? The thing is in same backing prefix run, we allocate a `16 MiB` chunk and then we measure the L3 misses for warm runs. And for fresh mapping, we allocate the required size and then free it for each size. Now, if by some means, the same backing was gaining almost always contiguous physical frames, it would have lower L3 misses and the increase in the misses towards the limit of the cache size would be explained by the live OS environment noise. Fresh mapping as per the data would be having non-contiguous physical pages.
+I repeated the previous experiment for the plateau but this time, I traced all the curves.
 
-But what would give this sort of advantage to same backing prefix mapping and not to fresh mapping? For that, I investigated how my OS allocates physical memory. My OS is `7.0.11-zen1-1.1-zen` which messes with CPU scheduling and I/O but it leaves the core memory management alone. It relies on mainline Linux buddy allocator.
+For each allocation trial, I allocated a fresh `32 MiB` HugeTLB-backed mapping and measured the curve.
 
-This is where a new possible theory to explain arises.
+![Controlled LLC curve](../images/cache-walk/controlled_llc_curve.svg)
 
-What Linux does is use buddy allocator for physical memory in orders of frame sizes. The lowest size is `4 KiB` and largest is `4 MiB`. So, when we demand `12 KiB` memory, we are given an `8 KiB` chunk along with a `4 KiB` chunk, both being contiguous in physical memory as well. So, when we asked for `16 MiB`, it allocated physical memory from the highest order resulting in highly contiguous memory. While in case of fresh allocations, we demanded for tiny allocations making the memory more and more fragmented and thus giving us memory that is backed by non-contiguous physical memory.
+The lighter lines are the individual curves and bold line is the median curve. There seems to be 2 families of curves and median curve was hiding this from me. 
 
-Let's do some quick math. `12 MiB` with 8-ways gives us `1.5 MiB` each "way". In our `2 MiB` huge pages, the entire region is physically required to be contiguous. Thus, a `2 MiB` allocation backed by huge pages should give us a nice spread across cache sets and lower L3 misses. From our data, we observe that L3 misses only start becoming significant from `4 MiB`. I would consider this as a potential support to our theory.
+One family stayed low, around `50-60 cycles/access`, up to about `8 MiB`, and then rose slowly. The other family climbed earlier and sat higher.
 
-So, now, we have our hypothesis: The early L3 cliff is probably hidden by OS fragmentation of physical memory causing conflict misses. So, if we were to allocate a ridiculous `32 MiB` chunk, we would get the memory from the highest order resulting in contiguous frames. And that might help us with improved spread. And hence, running the cache latency experiment on this memory region should give us at least some form of LLC regime other than cliff.
+I tried to find what exactly differentiated these families.
 
-## The Moment of Truth
-So I tested that prediction directly. I allocated one `32 MiB` explicit-huge buffer, measured prefixes of that same backing, and reran the original latency sweep with PMU counters. I also did these runs immediately after a reboot, when the system was more likely to hand out less fragmented physical memory. If backing layout was really the missing variable, this should recover a cleaner LLC regime.
+The only difference that held up was that low curves had even chain seed + even mapping index while the higher ones seemed to have odd mapping + odd chain seeds.
 
-![32 MiB explicit huge page run](../images/cache-walk/the-plateau.svg)
+Now, what is "mapping index"? Just the run number. 1st run is odd, 2nd is even and so on. And the chain seed is the random chain's starting address ( I know it seems stupid to believe that the seed would have any effect at all but at this point, I was just too paranoid to discard anything tiny).
 
-Finally, after so much digging, we finally observe the plateau (partially)! Well, it does rise up a bit quickly but I would give that to the shared nature of L3. There are random processes interacting with the memory and so some of our accesses might be getting evicted by other processes and this becomes significant when we are pushing towards the limit of the cache.
+So, next obvious thing to do is find out if one of them is particularly responsible for the difference in families.
 
-## What Actually Changed
-That `32 MiB` same-backing huge-page sweep did not magically give me a perfect textbook staircase. But it did something more useful: it brought back an actual LLC regime. The ugly `4–8 MiB` cliff from the fresh-allocation runs was not some fixed property of the CPU. It depended heavily on how the mapping got backed.
+## Cross-Examining the Suspects
 
-Cache microbenchmarking isn't just about working-set size and access. Page size, backing policy and physical placement can deform the picture badly enough to make LLC plateau look like it vanished. It did not vanish. I was just measuring it through a pretty terrible allocation strategy.
+So to find the real culprit, I crossed them.
+
+For each run, I used:
+
+| Parameter | Value |
+| --- | ---: |
+| Mappings | 16 |
+| Chain seeds per mapping | 8 |
+| Repetitions per mapping/seed pair | 3 |
+| Sizes | 6, 8, 10, 12 MiB |
+
+For each size, I treated mapping, seed, and their interaction as a small factorial design and estimated how much of the total variance each one explained. I used 50% as a rough cutoff for calling a term "dominant" at that size — not a formal significance test, just a way to see which knob mattered most. Very scientific of me, I know.
+
+Three suspects, one lineup:
+| Term | Meaning |
+| --- | --- |
+| Mapping | Some mappings are faster even after averaging over seeds |
+| Seed | Some chain seeds are faster even after averaging over mappings |
+| Interaction | A seed is good on one mapping and bad on another |
+Yes, I am know that 'the interaction term' sounds like something a stats professor made up to fail me. It's just 'a seed can be lucky on one mapping and unlucky on another'.
+
+Each mapping/seed pair got 3 repetitions within a run, and I re-ran the whole comparison multiple times on top of that — mainly to make sure I hadn't just gotten a lucky (or unlucky) patch of physical memory on any one attempt.
+
+| Run | Mapping-dominant sizes | Seed-dominant sizes | Interaction-dominant sizes |
+| --- | --- | --- | --- |
+| Run 1 | 12 MiB | none | 6, 8, 10 MiB |
+| Run 2 | 6, 8, 10, 12 MiB | none | none |
+| Run 3 | 8 MiB | none | 6, 10, 12 MiB |
+
+This killed almost all the explanations, but introduced a sharper problem: the three runs disagree with each other heavily.
+
+Run 1 says `12 MiB` is mapping-dominant and `6/8/10 MiB` are interaction-dominant. Run 3 says `8 MiB` is mapping-dominant and `6/10/12 MiB` are interaction-dominant. Only Run 2 says everything is mapping-dominant. That is three runs of the same experiment producing three different stories about which sizes fall into which bucket, with only one thing reproducing cleanly across all runs: the seed never wins.
+
+That leaves exactly one thing still invisible: the physical reality sitting behind each mapping index. Nothing past this point can be settled without looking at that directly instead of inferring it from a curve.
+
+
+## Where I Stopped
+
+Looking at it directly means logging the huge-page PFNs behind each mapping and checking them against (reverse engineered) Intel's LLC slice-hash function. I'm not doing that here.
+
+The reason that is that I have learned that every easy next step has led me down and down the rabbit hole. Earlier in the investigation, I burned more than 2 weeks of work on a false lead that didn't even make it into this post. At some point, one more experiment stops being rigor and starts being a way to avoid writing the ending.
+
+So here's the actual ending I have:
+
+The missing plateau was never missing. It was conditional: it showed up when the physical mapping and the chain order happened to line up, and my very first sweep averaged the runs where they lined up together with the runs where they didn't, then treated the result like a single meaningful number.
+
+That also explains the reboot effect from earlier. Right after boot, most of physical memory is still free, so the allocator has more room to hand out pages that happen to spread nicely across LLC sets — still mapping luck, just dressed up as a reboot effect. I haven't checked that against actual PFNs, so treat it as a guess and not a result. But it's the guess everything else here points to.
+
+Which is exactly the check I said I wasn't doing two paragraphs ago. So: next post.
 
 ## References
+
 - [Cache hierarchy of Intel Core i5-12450HX](https://www.intel.com/content/www/us/en/products/sku/228794/intel-core-i512450hx-processor-12m-cache-up-to-4-40-ghz/specifications.html)
 - [Linux kernel physical memory documentation](https://www.kernel.org/doc/html/latest/mm/physical_memory.html)
 - [Linux buddy allocator](https://students.mimuw.edu.pl/ZSO/Wyklady/06_memory2/BuddySlabAllocator.pdf)
