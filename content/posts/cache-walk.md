@@ -224,3 +224,7 @@ Now, this seems like a rabbit hole to dive into. But for now, I am going to end 
 ## References
 
 - [Cache hierarchy of Intel Core i5-12450HX](https://www.intel.com/content/www/us/en/products/sku/228794/intel-core-i512450hx-processor-12m-cache-up-to-4-40-ghz/specifications.html)
+
+- [Intel Performance Monitoring events](https://github.com/intel/perfmon)
+
+- [Transparent HugePages](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html)
