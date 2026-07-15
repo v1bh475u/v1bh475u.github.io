@@ -1,5 +1,5 @@
 +++
-date = '2026-06-03T12:47:07+05:30'
+date = '2026-07-14T12:07:07+05:30'
 draft = false
 title = 'The L3 Plateau That Disappeared'
 author = 'vibhatsu'
@@ -9,7 +9,7 @@ coverCaption = ""
 description = "I wanted to see the textbook cache-latency staircase on my own machine. The missing L3 plateau pulled me into TLBs, offsets, PMU counters, huge pages, and physical mappings."
 readingTime = true
 comments = true
-keywords = ["cache", "cache analysis", "pointer chase", "LLC", "L3 cache", "huge pages", "PMU", "physical mapping"]
+keywords = ["cache", "cache analysis", "pointer chase", "LLC", "L3 cache", "TLB", "huge pages", "HugeTLB", "PMU", "RDTSC", "microbenchmark", "physical mapping"]
 +++
 
 Textbook cache-latency plots have this extremely simplistic model of memory: as the working-set size increases, the latency increases forming a staircase graph with L1, L2, L3 and DRAM as steps. I always wanted to observe this graph on my own machine and just got enough time to play around with it. The results were not what I expected. This blog shows my journey in finding that graph.
