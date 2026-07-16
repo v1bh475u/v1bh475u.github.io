@@ -1,0 +1,110 @@
+.not-found {
+  display: flex;
+  min-height: min(620px, 68vh);
+  padding: clamp(3rem, 10vw, 7rem) 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.not-found__code {
+  display: flex;
+  align-items: center;
+  color: var(--accent);
+  font-size: clamp(5rem, 22vw, 11rem);
+  font-weight: 700;
+  line-height: 0.8;
+  letter-spacing: -0.12em;
+  text-shadow: 0.04em 0.04em 0 color-mix(in srgb, var(--accent), transparent 82%);
+}
+
+.not-found__zero {
+  display: inline-flex;
+  width: 0.62em;
+  height: 0.78em;
+  margin: 0 0.08em;
+  align-items: center;
+  justify-content: center;
+  border: 0.07em dashed currentColor;
+  border-radius: 50%;
+  color: var(--background);
+  background: var(--accent);
+  font-size: 0.72em;
+  transform: rotate(-8deg);
+}
+
+.not-found__eyebrow {
+  margin: 2.25rem 0 0.65rem;
+  color: color-mix(in srgb, var(--accent), white 25%);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.not-found__title {
+  margin: 0;
+  color: var(--color);
+  font-size: clamp(1.7rem, 5vw, 2.5rem) !important;
+}
+
+.not-found__message {
+  max-width: 620px;
+  margin-top: 0.8rem;
+  color: color-mix(in srgb, var(--color), transparent 24%);
+}
+
+.not-found__message > :first-child {
+  margin-top: 0;
+}
+
+.not-found__message > :last-child {
+  margin-bottom: 0;
+}
+
+.not-found__actions {
+  display: flex;
+  margin-top: 2rem;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.not-found__button {
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast-color);
+  font-weight: 700;
+  text-decoration: none;
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+
+.not-found__button:hover,
+.not-found__button:focus-visible {
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--accent), transparent 65%);
+  transform: translate(-2px, -2px);
+}
+
+.not-found__link {
+  color: var(--accent);
+  text-underline-offset: 0.25em;
+}
+
+.not-found__button:focus-visible,
+.not-found__link:focus-visible {
+  outline: 2px dashed var(--accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 520px) {
+  .not-found__actions {
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .not-found__button {
+    transition: none;
+  }
+}

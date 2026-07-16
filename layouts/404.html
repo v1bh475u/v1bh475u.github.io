@@ -1,0 +1,27 @@
+{{ define "title" }}
+  <title>404 — Page not found :: {{ .Site.Title }}</title>
+{{ end }}
+
+{{ define "main" }}
+  <main class="not-found" aria-labelledby="not-found-title">
+    <div class="not-found__code" aria-hidden="true">
+      <span>4</span><span class="not-found__zero">0</span><span>4</span>
+    </div>
+
+    <p class="not-found__eyebrow">HTTP status: lost in the stack</p>
+    <h1 id="not-found-title" class="not-found__title">Page not found</h1>
+
+    <div class="not-found__message">
+      {{ with .Site.Params.error404.message }}
+        {{ . | markdownify }}
+      {{ else }}
+        <p>The page you’re looking for may have moved, or it never existed in the first place.</p>
+      {{ end }}
+    </div>
+
+    <nav class="not-found__actions" aria-label="404 page links">
+      <a class="not-found__button" href="{{ .Site.Home.RelPermalink }}">cd /home</a>
+      <a class="not-found__link" href="{{ "posts/" | relLangURL }}">browse posts&nbsp;→</a>
+    </nav>
+  </main>
+{{ end }}
