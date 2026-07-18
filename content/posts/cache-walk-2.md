@@ -12,44 +12,45 @@ comments = true
 keywords = ["HugeTLB", "Linux buddy allocator", "explicit huge pages", "LLC", "cache latency", "PFN", "physical memory layout", "Intel Alder Lake", "cache associativity", "page allocation"]
 +++
 
-In the previous blog [here](https://vibhatsu.me/posts/cache-walk), I tried to replicate the textbook plot on my machine. I had to tweak a lot of knobs before finally finding the plot but the cause of the plot was completely unexplained. In this post, I am going to continue my journey in analyzing why the plot did not appear in the first experiment itself!
+In the previous blog [here](https://vibhatsu.me/posts/cache-walk), I tried to replicate the textbook plot on my machine. I had to tweak a lot of knobs before finally finding the plot, but the cause of the plot was completely unexplained. In this post, I am going to continue my journey of analyzing why the plot did not appear in the first experiment itself!
 
 ## A Quick Recap
 
 Last time, for the plot, I changed 3 conditions:
+
 - Turned off the prefetchers;
 - Did the experiment directly after boot; and
 - Allocated a single chunk and used prefixes from it.
 
-So, for the starters, I focused on simpler and tangible tests _(whispers: wrong move)_. I repeated the same experiment but with fresh allocations.
+So, for starters, I focused on simpler and more tangible tests _(whispers: wrong move)_. I repeated the same experiment but with fresh allocations.
 
 ![Fresh allocation plot](../images/cache-digging/fresh_run_curves.svg)
 
-Well, I was expecting there to be not much difference only that since in a fresh run, there is fresh allocation per size, there has to be much more noise. As you may notice, there are multiple graphs, one graph per run and 20 runs in total. I then decided to see how runs performed per size across the runs.
+Well, I was not expecting there to be much difference, except that since there is a fresh allocation per size in a fresh run, there has to be much more noise. As you may notice, there are multiple graphs: one graph per run, with 20 runs in total. I then decided to see how each size performed across the runs.
 
 ![Fresh degradation](../images/cache-digging/fresh_run_degradation.svg)
 
-There seems to be an alternating pattern of good runs and bad runs. I decided to do the same for same backing one and got this:
+There seems to be an alternating pattern of good runs and bad runs. I decided to do the same for the same-backing one and got this:
 
 ![Same backing degradation](../images/cache-digging/same_run_degradation.svg)
 
-It has the same alternating pattern but with less magnitude! I re-ran multiple times and same sort of alternating pattern occured. This did not match my understandings at all!
+It has the same alternating pattern but with a smaller magnitude! I re-ran it multiple times, and the same sort of alternating pattern occurred. This did not match my understanding at all!
 
 ## A tiny tour on how linux manages memory
 
-First of all, I am going to abstract a **LOT** for the simplication of the explanation so please take this with a grain of salt. Hopefully, this will help explain why I was so surprised.
+First of all, I am going to abstract a **LOT** for the simplification of the explanation, so please take this with a grain of salt. Hopefully, this will help explain why I was so surprised.
 
 ### NUMA
 
-First of all, on the high level, the memory is divided into NUMA nodes. NUMA (Non-Uniform Memory Access) is the system that has some regions of memory closer to one core than other resulting in different memory access times. Thus, it is advatageous to use NUMA nodes closer to the core for processes on that core.
+First of all, at a high level, memory is divided into NUMA nodes. NUMA (Non-Uniform Memory Access) is a system in which some regions of memory are closer to one core than another, resulting in different memory access times. Thus, it is advantageous for processes to use NUMA nodes closer to the core on which they run.
 
-On my system, there is only one NUMA node so it makes no difference in my observations.
+On my system, there is only one NUMA node, so it makes no difference to my observations.
 
 Linux then divides each node into `zones`.
 
 ### Zones
 
-Why zones? Because certain requirements are needed to be fulfilled:
+Why zones? Because certain requirements need to be fulfilled:
 
 - `ZONE_DMA`: very low memory for legacy DMA devices.
 - `ZONE_DMA32`: memory below 4 GiB for devices with 32-bit addressing.
@@ -61,42 +62,42 @@ Each zone has a buddy allocator handling memory requests.
 
 ### Buddy allocator
 
-It allocates memory with normal page ( `4 KiB` ) as the smallest unit.
+It allocates memory with a normal page (`4 KiB`) as the smallest unit.
 
-A buddy allocator has multiple freelists, each having chunks with sizes as powers of 2s as shown below:
+A buddy allocator has multiple freelists, each containing chunks whose sizes are powers of 2, as shown below:
 
 <!-- image of different orders -->
-Each list contains only those chunks which satisfy the size requirement.
+Each list contains only those chunks that satisfy the size requirement.
 
-The core idea behind buddy allocator is that it divides the memory into 2 buddies. Let's take an example.
+The core idea behind the buddy allocator is that it divides memory into 2 buddies. Let's take an example.
 
 Let's say we have our `4 GiB` memory and the highest order of our buddy allocator is `11`, i.e., the highest order freelist contains chunks of size \(2^{11 - 1}\ *\ 4\text{ KiB} = 4\text{ MiB} \).
 
-Hence, the `4 GiB` memory is initially divided into multiple chunks of `4 MiB` each. There will be \( 2^{12}\) MiB / 4 MiB = 1024  chunks in the highest order. (Note: I am not considering DMA32 zone reservation or any other reservation for this explanation.)
+Hence, the `4 GiB` memory is initially divided into multiple chunks of `4 MiB` each. There will be \( 2^{12}\) MiB / 4 MiB = 1024 chunks in the highest order. (Note: I am not considering the DMA32 zone reservation or any other reservation for this explanation.)
 
-With this initial setup, let's say we our allocator gets request for lowest size ( `4 KiB`). 
+With this initial setup, let's say our allocator gets a request for the lowest size (`4 KiB`).
 
 #### Memory allocation
 
-In buddy allocator, we can only make requests in terms of sizes available or else it will give the lowest chunk that is larger or same size as the requested size.
+In the buddy allocator, we can only make requests in terms of the available sizes; otherwise, it will give us the smallest chunk that is larger than or equal to the requested size.
 
-Since our current order `0` has no chunks, the buddy allocator searches for a chunk in the higher order freelist. The search goes upto order `11` where we find the first non-empty freelist. A chunk is taken from this list's head and it is split into 2 chunks of `2 MiB` each. These chunks are known as buddies. They can coalesce together to re-form the original `4 MiB` chunk. They only differ in lowest set bit of their starting address.
+Since our current order `0` has no chunks, the buddy allocator searches for a chunk in a higher-order freelist. The search goes up to order `11`, where we find the first non-empty freelist. A chunk is taken from this list's head, and it is split into 2 chunks of `2 MiB` each. These chunks are known as buddies. They can coalesce to re-form the original `4 MiB` chunk. They differ only in the lowest set bit of their starting addresses.
 
-These 2 chunks are placed in order `10` list and chunk with lower address is picked and further recursively broken down in a similar fashion until we reach the target size which in this case is `4 KiB`. After this allocation, our buddy allocator would look something like this:
+These 2 chunks are placed in the order `10` list, and the chunk with the lower address is picked and recursively broken down further in a similar fashion until we reach the target size, which in this case is `4 KiB`. After this allocation, our buddy allocator would look something like this:
 
 <!-- photo -->
 
 Each list would have one chunk.
 
-#### Memory de-allocation
+#### Memory deallocation
 
-Now, let's say our `4 KiB` frame was freed. It returns back to the allocator. Since we have 2 buddies of the same order, they coalesce to form a chunk of one order higher and this goes on recursively with hardcoded limit in the kernel. 
+Now, let's say our `4 KiB` frame was freed. It returns to the allocator. Since we have 2 buddies of the same order, they coalesce to form a chunk one order higher, and this continues recursively up to a hardcoded limit in the kernel.
 
-If there was no buddy, then the chunk would remain in the same order. 
+If there were no buddy, the chunk would remain in the same order.
 
 ### HugeTLB
 
-Now, I cannot directly touch the memory from buddy allocator from userspace. I am using `mmap` and for `mmap` to be able to use huge pages, I need to first reserve the pages inside the kernel.
+Now, I cannot directly touch memory from the buddy allocator from userspace. I am using `mmap`, and for `mmap` to be able to use huge pages, I first need to reserve the pages inside the kernel.
 
 That is done using the following:
 
@@ -104,17 +105,17 @@ That is done using the following:
 sudo sysctl -w vm.nr_hugepages=1024
 ```
 
-This sets a mandatory requirement to have `1024` huge pages available for `mmaping`. However, the kernel does "best effort" attempt to fulfill this which means the limit may not be fulfilled completely.
+This sets a mandatory requirement to have `1024` huge pages available for `mmapping`. However, the kernel makes a "best effort" attempt to fulfill this, which means the limit may not be fulfilled completely.
 
-Internally, what happens is that buddy allocator is requested to give 1024 `2 MiB` chunks. These pages are stored in a freelist in `HugeTLB`.
+Internally, what happens is that the buddy allocator is requested to provide 1024 `2 MiB` chunks. These pages are stored in a freelist in `HugeTLB`.
 
-When mmaped with explicit huge pages, the pages are reserved (basically promised) and the actual mapping and entry happens on first page fault. And on freeing, they are freed in reverse order.
+When `mmapped` with explicit huge pages, the pages are reserved (basically promised), and the actual mapping and entry happen on the first page fault. Upon freeing, they are freed in reverse order.
 
-In my experiment, I doing `memset` on the entire region immediately after the `mmaping`. So, all the page faults occur in a way that mapped frames are exactly as the way they were present in the freelist.
+In my experiment, I am doing a `memset` on the entire region immediately after the `mmapping`. So, all the page faults occur such that the mapped frames are in exactly the same order as they were in the freelist.
 
 ## PFN logging
 
-To get closer to the answer, I decided to repeat the experiment but this time, log the PFNs that are actually mapped to my virtual pages.
+To get closer to the answer, I decided to repeat the experiment, but this time, I logged the PFNs that were actually mapped to my virtual pages.
 
 The results:
 
@@ -143,16 +144,16 @@ The results:
 | Run 20 | 3074 | 3073 | 3072 | 3071 | 3070 | 3069 | 3068 | 3067 | 3056 | 3057 | 3066 | 3063 | 2902 | 2783 | 2907 | 2746 |
 
 
-I confirmed that for the same mapping case, I got lucky to have no external process disturbance and have exactly the same 16 huge pages in all runs.
+I confirmed that, for the same-mapping case, I was lucky enough to have no disturbance from an external process and to get exactly the same 16 huge pages in all runs.
 
-Notice that we have contiguous frames on one end and not-so-contiguous frames on other. Now, the same backing uses prefixes. When the contiguous frames were on the starting end, the spread in L3 was extremely nice and I got lower L3 misses (these were the conflict misses that are now gone). And on the other end, there were some conflict misses.
+Notice that we have contiguous frames at one end and not-so-contiguous frames at the other. Now, the same backing uses prefixes. When the contiguous frames were at the starting end, the spread in L3 was extremely nice, and I got fewer L3 misses (these were the conflict misses that are now gone). At the other end, there were some conflict misses.
 
 ## My theory
 
-When I reboot, the buddy allocator has mostly non-fragmented memory and so there is more chance of getting pages which share page boundaries, i.e, they are contiguous.
+When I reboot, the buddy allocator has mostly non-fragmented memory, so there is more chance of getting pages that share page boundaries, i.e., that are contiguous.
 
-Now, as you may know, position of addresses in sets is dependent on physical address bits. And the contiguous memory spreads across the sets more nicely in general.
+Now, as you may know, the position of addresses in sets depends on physical address bits. Contiguous memory also spreads across the sets more nicely in general.
 
-This gave me the L3 plateau. And as the time passes after reboot, the memory becomes too fragmented and hence I get no nice spreading across sets.
+This gave me the L3 plateau. As time passes after reboot, the memory becomes too fragmented, and hence I get no nice spreading across the sets.
 
-This was a nice experiment to dig deeper into the modern processors and find things out.
+This was a nice experiment for digging deeper into modern processors and finding things out.
