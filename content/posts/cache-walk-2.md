@@ -3,13 +3,13 @@ date = '2026-07-14T12:07:07+05:30'
 draft = true
 title = 'A curious case of alternating good and bad allocation'
 author = 'vibhatsu'
-tags = []
+tags = ["cache-analysis", "linux-memory-management", "hugetlb", "huge-pages", "performance"]
 cover = ""
 coverCaption = ""
-description = "This is continuation of my journey to find the reason why L3 regime decided to appear in some cases and not in others. Reference blog post [[here]](https://vibhatsu.me/posts/cache-walk)"
+description = "This is a continuation of my journey to find the reason why the L3 regime decided to appear in some cases and not in others. Reference blog post [[here]](https://vibhatsu.me/posts/cache-walk)"
 readingTime = true
 comments = true
-keywords = []
+keywords = ["HugeTLB", "Linux buddy allocator", "explicit huge pages", "LLC", "cache latency", "PFN", "physical memory layout", "Intel Alder Lake", "cache associativity", "page allocation"]
 +++
 
 In the previous blog [here](https://vibhatsu.me/posts/cache-walk), I tried to replicate the textbook plot on my machine. I had to tweak a lot of knobs before finally finding the plot but the cause of the plot was completely unexplained. In this post, I am going to continue my journey in analyzing why the plot did not appear in the first experiment itself!
