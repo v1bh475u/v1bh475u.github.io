@@ -12,7 +12,11 @@ comments = true
 keywords = ["cache", "cache analysis", "pointer chase", "LLC", "L3 cache", "TLB", "huge pages", "HugeTLB", "PMU", "RDTSC", "microbenchmark", "physical mapping"]
 +++
 
-Textbook cache-latency plots have this extremely simplistic model of memory: as the working-set size increases, the latency increases forming a staircase graph with L1, L2, L3 and DRAM as steps. I always wanted to observe this graph on my own machine and just got enough time to play around with it. The results were not what I expected. This blog shows my journey in finding that graph.
+Textbook cache-latency plots have this extremely simplistic model of memory: as the working-set size increases, the latency increases forming a staircase graph with L1, L2, L3 and DRAM as steps. Something like this:
+
+![ideal graph](../images/cache-walk/ideal_cache_latency.svg)
+
+I always wanted to observe this graph on my own machine and just got enough time to play around with it. The results were not what I expected. This blog shows my journey in finding that graph.
 
 ## My Beautiful Machine
 
