@@ -1,0 +1,815 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="706" viewBox="0 0 1280 706">
+<rect width="100%" height="100%" fill="#1f222a"/>
+<text x="112" y="29" font-family="sans-serif" font-size="20" font-weight="600" fill="#f7fff9">Fresh allocation: size-specific run deviations</text>
+<text x="112" y="50" font-family="sans-serif" font-size="12" fill="#b8c8be">Each cell is latency versus that size's 20-run median. Deep green is faster; medium green is slower. Values are percentages.</text>
+<text x="112" y="70" font-family="sans-serif" font-size="11" fill="#b8c8be">The final column is median even-run latency minus median odd-run latency; it exposes period-two behavior.</text>
+<rect x="112" y="88" width="880" height="540" fill="#252932"/>
+<rect x="1026" y="88" width="94" height="540" fill="#252932"/>
+<text x="134.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">1</text>
+<text x="178.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">2</text>
+<text x="222.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">3</text>
+<text x="266.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">4</text>
+<text x="310.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">5</text>
+<text x="354.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">6</text>
+<text x="398.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">7</text>
+<text x="442.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">8</text>
+<text x="486.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">9</text>
+<text x="530.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">10</text>
+<text x="574.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">11</text>
+<text x="618.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">12</text>
+<text x="662.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">13</text>
+<text x="706.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">14</text>
+<text x="750.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">15</text>
+<text x="794.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">16</text>
+<text x="838.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">17</text>
+<text x="882.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">18</text>
+<text x="926.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">19</text>
+<text x="970.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">20</text>
+<text x="1073.0" y="78" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">even − odd</text>
+<text x="102" y="107.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">4 KiB</text>
+<rect x="113" y="89" width="42" height="28" fill="#252932"><title>Run 1, 4 KiB: +0.013%</title></rect>
+<text x="134.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="157" y="89" width="42" height="28" fill="#252a32"><title>Run 2, 4 KiB: -0.595%</title></rect>
+<text x="178.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.6</text>
+<rect x="201" y="89" width="42" height="28" fill="#252a32"><title>Run 3, 4 KiB: -0.393%</title></rect>
+<text x="222.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.4</text>
+<rect x="245" y="89" width="42" height="28" fill="#252932"><title>Run 4, 4 KiB: -0.220%</title></rect>
+<text x="266.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="289" y="89" width="42" height="28" fill="#252932"><title>Run 5, 4 KiB: -0.125%</title></rect>
+<text x="310.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="333" y="89" width="42" height="28" fill="#252932"><title>Run 6, 4 KiB: +0.025%</title></rect>
+<text x="354.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="377" y="89" width="42" height="28" fill="#252932"><title>Run 7, 4 KiB: +0.105%</title></rect>
+<text x="398.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="421" y="89" width="42" height="28" fill="#252b33"><title>Run 8, 4 KiB: +0.490%</title></rect>
+<text x="442.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.5</text>
+<rect x="465" y="89" width="42" height="28" fill="#252932"><title>Run 9, 4 KiB: -0.013%</title></rect>
+<text x="486.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="509" y="89" width="42" height="28" fill="#252932"><title>Run 10, 4 KiB: -0.208%</title></rect>
+<text x="530.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="553" y="89" width="42" height="28" fill="#252a32"><title>Run 11, 4 KiB: -0.313%</title></rect>
+<text x="574.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.3</text>
+<rect x="597" y="89" width="42" height="28" fill="#252932"><title>Run 12, 4 KiB: -0.062%</title></rect>
+<text x="618.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="641" y="89" width="42" height="28" fill="#252932"><title>Run 13, 4 KiB: +0.099%</title></rect>
+<text x="662.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="685" y="89" width="42" height="28" fill="#252a32"><title>Run 14, 4 KiB: +0.163%</title></rect>
+<text x="706.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="729" y="89" width="42" height="28" fill="#252932"><title>Run 15, 4 KiB: +0.083%</title></rect>
+<text x="750.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="773" y="89" width="42" height="28" fill="#252932"><title>Run 16, 4 KiB: -0.044%</title></rect>
+<text x="794.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="817" y="89" width="42" height="28" fill="#252932"><title>Run 17, 4 KiB: +0.023%</title></rect>
+<text x="838.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="861" y="89" width="42" height="28" fill="#252b33"><title>Run 18, 4 KiB: +0.411%</title></rect>
+<text x="882.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.4</text>
+<rect x="905" y="89" width="42" height="28" fill="#252a32"><title>Run 19, 4 KiB: -0.423%</title></rect>
+<text x="926.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.4</text>
+<rect x="949" y="89" width="42" height="28" fill="#252a33"><title>Run 20, 4 KiB: +0.318%</title></rect>
+<text x="970.0" y="106.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="1027" y="89" width="92" height="28" fill="#252932"><title>4 KiB even minus odd: -0.010%</title></rect>
+<text x="1073.0" y="107.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">-0.0%</text>
+<text x="102" y="137.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">8 KiB</text>
+<rect x="113" y="119" width="42" height="28" fill="#252c33"><title>Run 1, 8 KiB: +0.553%</title></rect>
+<text x="134.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.6</text>
+<rect x="157" y="119" width="42" height="28" fill="#252932"><title>Run 2, 8 KiB: -0.057%</title></rect>
+<text x="178.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="201" y="119" width="42" height="28" fill="#252a32"><title>Run 3, 8 KiB: +0.263%</title></rect>
+<text x="222.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="245" y="119" width="42" height="28" fill="#252a32"><title>Run 4, 8 KiB: +0.155%</title></rect>
+<text x="266.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="289" y="119" width="42" height="28" fill="#252a32"><title>Run 5, 8 KiB: +0.165%</title></rect>
+<text x="310.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="333" y="119" width="42" height="28" fill="#252932"><title>Run 6, 8 KiB: -0.082%</title></rect>
+<text x="354.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="377" y="119" width="42" height="28" fill="#252a32"><title>Run 7, 8 KiB: +0.162%</title></rect>
+<text x="398.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="421" y="119" width="42" height="28" fill="#252932"><title>Run 8, 8 KiB: -0.078%</title></rect>
+<text x="442.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="465" y="119" width="42" height="28" fill="#252932"><title>Run 9, 8 KiB: -0.182%</title></rect>
+<text x="486.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="509" y="119" width="42" height="28" fill="#252932"><title>Run 10, 8 KiB: -0.003%</title></rect>
+<text x="530.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="553" y="119" width="42" height="28" fill="#252a32"><title>Run 11, 8 KiB: -0.273%</title></rect>
+<text x="574.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.3</text>
+<rect x="597" y="119" width="42" height="28" fill="#252932"><title>Run 12, 8 KiB: -0.045%</title></rect>
+<text x="618.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="641" y="119" width="42" height="28" fill="#252a33"><title>Run 13, 8 KiB: +0.311%</title></rect>
+<text x="662.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="685" y="119" width="42" height="28" fill="#252932"><title>Run 14, 8 KiB: -0.191%</title></rect>
+<text x="706.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="729" y="119" width="42" height="28" fill="#252932"><title>Run 15, 8 KiB: -0.097%</title></rect>
+<text x="750.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="773" y="119" width="42" height="28" fill="#252932"><title>Run 16, 8 KiB: -0.185%</title></rect>
+<text x="794.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="817" y="119" width="42" height="28" fill="#252932"><title>Run 17, 8 KiB: +0.077%</title></rect>
+<text x="838.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="861" y="119" width="42" height="28" fill="#252c33"><title>Run 18, 8 KiB: +0.658%</title></rect>
+<text x="882.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.7</text>
+<rect x="905" y="119" width="42" height="28" fill="#252932"><title>Run 19, 8 KiB: +0.003%</title></rect>
+<text x="926.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="949" y="119" width="42" height="28" fill="#252a33"><title>Run 20, 8 KiB: +0.323%</title></rect>
+<text x="970.0" y="136.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="1027" y="119" width="92" height="28" fill="#252932"><title>8 KiB even minus odd: -0.171%</title></rect>
+<text x="1073.0" y="137.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">-0.2%</text>
+<text x="102" y="167.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">16 KiB</text>
+<rect x="113" y="149" width="42" height="28" fill="#252a32"><title>Run 1, 16 KiB: +0.246%</title></rect>
+<text x="134.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="157" y="149" width="42" height="28" fill="#252a32"><title>Run 2, 16 KiB: -0.264%</title></rect>
+<text x="178.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.3</text>
+<rect x="201" y="149" width="42" height="28" fill="#252932"><title>Run 3, 16 KiB: +0.014%</title></rect>
+<text x="222.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="245" y="149" width="42" height="28" fill="#252932"><title>Run 4, 16 KiB: -0.186%</title></rect>
+<text x="266.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="289" y="149" width="42" height="28" fill="#252932"><title>Run 5, 16 KiB: -0.105%</title></rect>
+<text x="310.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="333" y="149" width="42" height="28" fill="#252932"><title>Run 6, 16 KiB: +0.064%</title></rect>
+<text x="354.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="377" y="149" width="42" height="28" fill="#252932"><title>Run 7, 16 KiB: -0.202%</title></rect>
+<text x="398.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="421" y="149" width="42" height="28" fill="#252a32"><title>Run 8, 16 KiB: -0.346%</title></rect>
+<text x="442.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.3</text>
+<rect x="465" y="149" width="42" height="28" fill="#252a32"><title>Run 9, 16 KiB: +0.146%</title></rect>
+<text x="486.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="509" y="149" width="42" height="28" fill="#252a32"><title>Run 10, 16 KiB: +0.249%</title></rect>
+<text x="530.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="553" y="149" width="42" height="28" fill="#252932"><title>Run 11, 16 KiB: -0.054%</title></rect>
+<text x="574.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="597" y="149" width="42" height="28" fill="#252932"><title>Run 12, 16 KiB: -0.148%</title></rect>
+<text x="618.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="641" y="149" width="42" height="28" fill="#252932"><title>Run 13, 16 KiB: -0.176%</title></rect>
+<text x="662.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="685" y="149" width="42" height="28" fill="#252a32"><title>Run 14, 16 KiB: +0.146%</title></rect>
+<text x="706.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="729" y="149" width="42" height="28" fill="#252932"><title>Run 15, 16 KiB: +0.079%</title></rect>
+<text x="750.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="773" y="149" width="42" height="28" fill="#252b33"><title>Run 16, 16 KiB: +0.356%</title></rect>
+<text x="794.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.4</text>
+<rect x="817" y="149" width="42" height="28" fill="#252932"><title>Run 17, 16 KiB: -0.014%</title></rect>
+<text x="838.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="861" y="149" width="42" height="28" fill="#252932"><title>Run 18, 16 KiB: -0.043%</title></rect>
+<text x="882.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="905" y="149" width="42" height="28" fill="#252a32"><title>Run 19, 16 KiB: +0.128%</title></rect>
+<text x="926.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="949" y="149" width="42" height="28" fill="#252a32"><title>Run 20, 16 KiB: +0.205%</title></rect>
+<text x="970.0" y="166.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="1027" y="149" width="92" height="28" fill="#252932"><title>16 KiB even minus odd: +0.010%</title></rect>
+<text x="1073.0" y="167.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+0.0%</text>
+<text x="102" y="197.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">32 KiB</text>
+<rect x="113" y="179" width="42" height="28" fill="#242b32"><title>Run 1, 32 KiB: -0.805%</title></rect>
+<text x="134.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.8</text>
+<rect x="157" y="179" width="42" height="28" fill="#252932"><title>Run 2, 32 KiB: -0.025%</title></rect>
+<text x="178.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="201" y="179" width="42" height="28" fill="#252a33"><title>Run 3, 32 KiB: +0.272%</title></rect>
+<text x="222.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="245" y="179" width="42" height="28" fill="#252932"><title>Run 4, 32 KiB: -0.129%</title></rect>
+<text x="266.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="289" y="179" width="42" height="28" fill="#252a32"><title>Run 5, 32 KiB: -0.260%</title></rect>
+<text x="310.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.3</text>
+<rect x="333" y="179" width="42" height="28" fill="#252a32"><title>Run 6, 32 KiB: -0.637%</title></rect>
+<text x="354.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.6</text>
+<rect x="377" y="179" width="42" height="28" fill="#252a32"><title>Run 7, 32 KiB: +0.127%</title></rect>
+<text x="398.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="421" y="179" width="42" height="28" fill="#242b32"><title>Run 8, 32 KiB: -0.824%</title></rect>
+<text x="442.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.8</text>
+<rect x="465" y="179" width="42" height="28" fill="#252a32"><title>Run 9, 32 KiB: -0.632%</title></rect>
+<text x="486.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.6</text>
+<rect x="509" y="179" width="42" height="28" fill="#252b33"><title>Run 10, 32 KiB: +0.346%</title></rect>
+<text x="530.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="553" y="179" width="42" height="28" fill="#252b33"><title>Run 11, 32 KiB: +0.364%</title></rect>
+<text x="574.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.4</text>
+<rect x="597" y="179" width="42" height="28" fill="#252a32"><title>Run 12, 32 KiB: +0.180%</title></rect>
+<text x="618.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="641" y="179" width="42" height="28" fill="#252b32"><title>Run 13, 32 KiB: -0.716%</title></rect>
+<text x="662.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.7</text>
+<rect x="685" y="179" width="42" height="28" fill="#252a32"><title>Run 14, 32 KiB: -0.612%</title></rect>
+<text x="706.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.6</text>
+<rect x="729" y="179" width="42" height="28" fill="#252a32"><title>Run 15, 32 KiB: -0.442%</title></rect>
+<text x="750.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.4</text>
+<rect x="773" y="179" width="42" height="28" fill="#252a32"><title>Run 16, 32 KiB: +0.219%</title></rect>
+<text x="794.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="817" y="179" width="42" height="28" fill="#252932"><title>Run 17, 32 KiB: +0.025%</title></rect>
+<text x="838.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="861" y="179" width="42" height="28" fill="#252a33"><title>Run 18, 32 KiB: +0.288%</title></rect>
+<text x="882.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="905" y="179" width="42" height="28" fill="#252b33"><title>Run 19, 32 KiB: +0.398%</title></rect>
+<text x="926.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.4</text>
+<rect x="949" y="179" width="42" height="28" fill="#252a32"><title>Run 20, 32 KiB: +0.265%</title></rect>
+<text x="970.0" y="196.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="1027" y="179" width="92" height="28" fill="#252a32"><title>32 KiB even minus odd: +0.195%</title></rect>
+<text x="1073.0" y="197.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+0.2%</text>
+<text x="102" y="227.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">64 KiB</text>
+<rect x="113" y="209" width="42" height="28" fill="#252a32"><title>Run 1, 64 KiB: +0.118%</title></rect>
+<text x="134.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="157" y="209" width="42" height="28" fill="#252932"><title>Run 2, 64 KiB: -0.003%</title></rect>
+<text x="178.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="201" y="209" width="42" height="28" fill="#252932"><title>Run 3, 64 KiB: -0.001%</title></rect>
+<text x="222.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="245" y="209" width="42" height="28" fill="#252932"><title>Run 4, 64 KiB: -0.001%</title></rect>
+<text x="266.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="289" y="209" width="42" height="28" fill="#252932"><title>Run 5, 64 KiB: -0.010%</title></rect>
+<text x="310.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="333" y="209" width="42" height="28" fill="#252932"><title>Run 6, 64 KiB: -0.008%</title></rect>
+<text x="354.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="377" y="209" width="42" height="28" fill="#252932"><title>Run 7, 64 KiB: +0.001%</title></rect>
+<text x="398.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="421" y="209" width="42" height="28" fill="#252932"><title>Run 8, 64 KiB: +0.006%</title></rect>
+<text x="442.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="465" y="209" width="42" height="28" fill="#252932"><title>Run 9, 64 KiB: +0.047%</title></rect>
+<text x="486.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="509" y="209" width="42" height="28" fill="#252932"><title>Run 10, 64 KiB: +0.018%</title></rect>
+<text x="530.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="553" y="209" width="42" height="28" fill="#252932"><title>Run 11, 64 KiB: +0.000%</title></rect>
+<text x="574.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="597" y="209" width="42" height="28" fill="#252932"><title>Run 12, 64 KiB: +0.044%</title></rect>
+<text x="618.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="641" y="209" width="42" height="28" fill="#252932"><title>Run 13, 64 KiB: -0.000%</title></rect>
+<text x="662.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="685" y="209" width="42" height="28" fill="#252932"><title>Run 14, 64 KiB: +0.002%</title></rect>
+<text x="706.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="729" y="209" width="42" height="28" fill="#252932"><title>Run 15, 64 KiB: -0.007%</title></rect>
+<text x="750.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="773" y="209" width="42" height="28" fill="#252932"><title>Run 16, 64 KiB: -0.001%</title></rect>
+<text x="794.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="817" y="209" width="42" height="28" fill="#252932"><title>Run 17, 64 KiB: -0.006%</title></rect>
+<text x="838.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="861" y="209" width="42" height="28" fill="#252932"><title>Run 18, 64 KiB: -0.003%</title></rect>
+<text x="882.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="905" y="209" width="42" height="28" fill="#252932"><title>Run 19, 64 KiB: +0.001%</title></rect>
+<text x="926.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="949" y="209" width="42" height="28" fill="#252932"><title>Run 20, 64 KiB: +0.052%</title></rect>
+<text x="970.0" y="226.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="1027" y="209" width="92" height="28" fill="#252932"><title>64 KiB even minus odd: +0.001%</title></rect>
+<text x="1073.0" y="227.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+0.0%</text>
+<text x="102" y="257.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">128 KiB</text>
+<rect x="113" y="239" width="42" height="28" fill="#252932"><title>Run 1, 128 KiB: -0.005%</title></rect>
+<text x="134.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="157" y="239" width="42" height="28" fill="#252932"><title>Run 2, 128 KiB: +0.012%</title></rect>
+<text x="178.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="201" y="239" width="42" height="28" fill="#252932"><title>Run 3, 128 KiB: +0.017%</title></rect>
+<text x="222.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="245" y="239" width="42" height="28" fill="#252932"><title>Run 4, 128 KiB: +0.007%</title></rect>
+<text x="266.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="289" y="239" width="42" height="28" fill="#252932"><title>Run 5, 128 KiB: -0.014%</title></rect>
+<text x="310.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="333" y="239" width="42" height="28" fill="#252932"><title>Run 6, 128 KiB: +0.020%</title></rect>
+<text x="354.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="377" y="239" width="42" height="28" fill="#252932"><title>Run 7, 128 KiB: -0.018%</title></rect>
+<text x="398.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="421" y="239" width="42" height="28" fill="#252932"><title>Run 8, 128 KiB: +0.035%</title></rect>
+<text x="442.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="465" y="239" width="42" height="28" fill="#252932"><title>Run 9, 128 KiB: +0.001%</title></rect>
+<text x="486.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="509" y="239" width="42" height="28" fill="#252932"><title>Run 10, 128 KiB: +0.005%</title></rect>
+<text x="530.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="553" y="239" width="42" height="28" fill="#252932"><title>Run 11, 128 KiB: +0.007%</title></rect>
+<text x="574.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="597" y="239" width="42" height="28" fill="#252932"><title>Run 12, 128 KiB: -0.009%</title></rect>
+<text x="618.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="641" y="239" width="42" height="28" fill="#252932"><title>Run 13, 128 KiB: -0.015%</title></rect>
+<text x="662.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="685" y="239" width="42" height="28" fill="#252932"><title>Run 14, 128 KiB: +0.009%</title></rect>
+<text x="706.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="729" y="239" width="42" height="28" fill="#252932"><title>Run 15, 128 KiB: -0.005%</title></rect>
+<text x="750.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="773" y="239" width="42" height="28" fill="#252932"><title>Run 16, 128 KiB: -0.009%</title></rect>
+<text x="794.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="817" y="239" width="42" height="28" fill="#252932"><title>Run 17, 128 KiB: -0.005%</title></rect>
+<text x="838.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="861" y="239" width="42" height="28" fill="#252932"><title>Run 18, 128 KiB: -0.001%</title></rect>
+<text x="882.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="905" y="239" width="42" height="28" fill="#252932"><title>Run 19, 128 KiB: +0.009%</title></rect>
+<text x="926.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="949" y="239" width="42" height="28" fill="#252932"><title>Run 20, 128 KiB: -0.001%</title></rect>
+<text x="970.0" y="256.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="1027" y="239" width="92" height="28" fill="#252932"><title>128 KiB even minus odd: +0.011%</title></rect>
+<text x="1073.0" y="257.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+0.0%</text>
+<text x="102" y="287.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">256 KiB</text>
+<rect x="113" y="269" width="42" height="28" fill="#252932"><title>Run 1, 256 KiB: -0.006%</title></rect>
+<text x="134.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="157" y="269" width="42" height="28" fill="#252932"><title>Run 2, 256 KiB: +0.000%</title></rect>
+<text x="178.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="201" y="269" width="42" height="28" fill="#252932"><title>Run 3, 256 KiB: -0.002%</title></rect>
+<text x="222.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="245" y="269" width="42" height="28" fill="#252932"><title>Run 4, 256 KiB: -0.008%</title></rect>
+<text x="266.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="289" y="269" width="42" height="28" fill="#252932"><title>Run 5, 256 KiB: +0.005%</title></rect>
+<text x="310.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="333" y="269" width="42" height="28" fill="#252932"><title>Run 6, 256 KiB: -0.012%</title></rect>
+<text x="354.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="377" y="269" width="42" height="28" fill="#252932"><title>Run 7, 256 KiB: -0.001%</title></rect>
+<text x="398.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="421" y="269" width="42" height="28" fill="#252932"><title>Run 8, 256 KiB: +0.011%</title></rect>
+<text x="442.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="465" y="269" width="42" height="28" fill="#252932"><title>Run 9, 256 KiB: -0.016%</title></rect>
+<text x="486.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="509" y="269" width="42" height="28" fill="#252932"><title>Run 10, 256 KiB: +0.003%</title></rect>
+<text x="530.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="553" y="269" width="42" height="28" fill="#252932"><title>Run 11, 256 KiB: +0.003%</title></rect>
+<text x="574.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="597" y="269" width="42" height="28" fill="#252932"><title>Run 12, 256 KiB: +0.010%</title></rect>
+<text x="618.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="641" y="269" width="42" height="28" fill="#252932"><title>Run 13, 256 KiB: -0.004%</title></rect>
+<text x="662.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="685" y="269" width="42" height="28" fill="#252932"><title>Run 14, 256 KiB: +0.004%</title></rect>
+<text x="706.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="729" y="269" width="42" height="28" fill="#252932"><title>Run 15, 256 KiB: +0.007%</title></rect>
+<text x="750.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="773" y="269" width="42" height="28" fill="#252932"><title>Run 16, 256 KiB: -0.002%</title></rect>
+<text x="794.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="817" y="269" width="42" height="28" fill="#252932"><title>Run 17, 256 KiB: +0.011%</title></rect>
+<text x="838.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="861" y="269" width="42" height="28" fill="#252932"><title>Run 18, 256 KiB: +0.007%</title></rect>
+<text x="882.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="905" y="269" width="42" height="28" fill="#252932"><title>Run 19, 256 KiB: -0.002%</title></rect>
+<text x="926.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="949" y="269" width="42" height="28" fill="#252932"><title>Run 20, 256 KiB: -0.000%</title></rect>
+<text x="970.0" y="286.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="1027" y="269" width="92" height="28" fill="#252932"><title>256 KiB even minus odd: +0.003%</title></rect>
+<text x="1073.0" y="287.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+0.0%</text>
+<text x="102" y="317.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">512 KiB</text>
+<rect x="113" y="299" width="42" height="28" fill="#252932"><title>Run 1, 512 KiB: -0.004%</title></rect>
+<text x="134.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="157" y="299" width="42" height="28" fill="#252932"><title>Run 2, 512 KiB: +0.011%</title></rect>
+<text x="178.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="201" y="299" width="42" height="28" fill="#252932"><title>Run 3, 512 KiB: -0.001%</title></rect>
+<text x="222.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="245" y="299" width="42" height="28" fill="#252932"><title>Run 4, 512 KiB: +0.000%</title></rect>
+<text x="266.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="289" y="299" width="42" height="28" fill="#252932"><title>Run 5, 512 KiB: -0.005%</title></rect>
+<text x="310.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="333" y="299" width="42" height="28" fill="#252932"><title>Run 6, 512 KiB: -0.000%</title></rect>
+<text x="354.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="377" y="299" width="42" height="28" fill="#252932"><title>Run 7, 512 KiB: +0.002%</title></rect>
+<text x="398.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="421" y="299" width="42" height="28" fill="#252932"><title>Run 8, 512 KiB: -0.002%</title></rect>
+<text x="442.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="465" y="299" width="42" height="28" fill="#252932"><title>Run 9, 512 KiB: +0.005%</title></rect>
+<text x="486.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="509" y="299" width="42" height="28" fill="#252932"><title>Run 10, 512 KiB: -0.009%</title></rect>
+<text x="530.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="553" y="299" width="42" height="28" fill="#252932"><title>Run 11, 512 KiB: -0.003%</title></rect>
+<text x="574.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="597" y="299" width="42" height="28" fill="#252932"><title>Run 12, 512 KiB: +0.000%</title></rect>
+<text x="618.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="641" y="299" width="42" height="28" fill="#252932"><title>Run 13, 512 KiB: +0.001%</title></rect>
+<text x="662.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="685" y="299" width="42" height="28" fill="#252932"><title>Run 14, 512 KiB: +0.010%</title></rect>
+<text x="706.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="729" y="299" width="42" height="28" fill="#252932"><title>Run 15, 512 KiB: +0.002%</title></rect>
+<text x="750.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="773" y="299" width="42" height="28" fill="#252932"><title>Run 16, 512 KiB: -0.003%</title></rect>
+<text x="794.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="817" y="299" width="42" height="28" fill="#252932"><title>Run 17, 512 KiB: +0.002%</title></rect>
+<text x="838.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="861" y="299" width="42" height="28" fill="#252932"><title>Run 18, 512 KiB: -0.006%</title></rect>
+<text x="882.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="905" y="299" width="42" height="28" fill="#252932"><title>Run 19, 512 KiB: -0.002%</title></rect>
+<text x="926.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="949" y="299" width="42" height="28" fill="#252932"><title>Run 20, 512 KiB: +0.009%</title></rect>
+<text x="970.0" y="316.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="1027" y="299" width="92" height="28" fill="#252932"><title>512 KiB even minus odd: +0.000%</title></rect>
+<text x="1073.0" y="317.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+0.0%</text>
+<text x="102" y="347.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">1 MiB</text>
+<rect x="113" y="329" width="42" height="28" fill="#252932"><title>Run 1, 1 MiB: +0.005%</title></rect>
+<text x="134.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="157" y="329" width="42" height="28" fill="#252932"><title>Run 2, 1 MiB: +0.022%</title></rect>
+<text x="178.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="201" y="329" width="42" height="28" fill="#252932"><title>Run 3, 1 MiB: +0.050%</title></rect>
+<text x="222.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="245" y="329" width="42" height="28" fill="#252932"><title>Run 4, 1 MiB: -0.023%</title></rect>
+<text x="266.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="289" y="329" width="42" height="28" fill="#252932"><title>Run 5, 1 MiB: -0.047%</title></rect>
+<text x="310.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="333" y="329" width="42" height="28" fill="#252932"><title>Run 6, 1 MiB: -0.008%</title></rect>
+<text x="354.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="377" y="329" width="42" height="28" fill="#252a32"><title>Run 7, 1 MiB: +0.135%</title></rect>
+<text x="398.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="421" y="329" width="42" height="28" fill="#252932"><title>Run 8, 1 MiB: +0.002%</title></rect>
+<text x="442.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="465" y="329" width="42" height="28" fill="#252932"><title>Run 9, 1 MiB: -0.030%</title></rect>
+<text x="486.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="509" y="329" width="42" height="28" fill="#252932"><title>Run 10, 1 MiB: -0.024%</title></rect>
+<text x="530.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="553" y="329" width="42" height="28" fill="#252932"><title>Run 11, 1 MiB: +0.012%</title></rect>
+<text x="574.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="597" y="329" width="42" height="28" fill="#252932"><title>Run 12, 1 MiB: -0.002%</title></rect>
+<text x="618.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="641" y="329" width="42" height="28" fill="#252932"><title>Run 13, 1 MiB: +0.043%</title></rect>
+<text x="662.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="685" y="329" width="42" height="28" fill="#252932"><title>Run 14, 1 MiB: -0.026%</title></rect>
+<text x="706.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="729" y="329" width="42" height="28" fill="#252932"><title>Run 15, 1 MiB: +0.088%</title></rect>
+<text x="750.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="773" y="329" width="42" height="28" fill="#252932"><title>Run 16, 1 MiB: -0.005%</title></rect>
+<text x="794.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="817" y="329" width="42" height="28" fill="#252932"><title>Run 17, 1 MiB: -0.012%</title></rect>
+<text x="838.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="861" y="329" width="42" height="28" fill="#252932"><title>Run 18, 1 MiB: +0.014%</title></rect>
+<text x="882.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="905" y="329" width="42" height="28" fill="#252932"><title>Run 19, 1 MiB: +0.049%</title></rect>
+<text x="926.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="949" y="329" width="42" height="28" fill="#252932"><title>Run 20, 1 MiB: -0.065%</title></rect>
+<text x="970.0" y="346.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="1027" y="329" width="92" height="28" fill="#252932"><title>1 MiB even minus odd: -0.034%</title></rect>
+<text x="1073.0" y="347.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">-0.0%</text>
+<text x="102" y="377.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">2 MiB</text>
+<rect x="113" y="359" width="42" height="28" fill="#252932"><title>Run 1, 2 MiB: +0.044%</title></rect>
+<text x="134.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="157" y="359" width="42" height="28" fill="#252932"><title>Run 2, 2 MiB: +0.019%</title></rect>
+<text x="178.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="201" y="359" width="42" height="28" fill="#252932"><title>Run 3, 2 MiB: -0.024%</title></rect>
+<text x="222.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="245" y="359" width="42" height="28" fill="#252932"><title>Run 4, 2 MiB: -0.036%</title></rect>
+<text x="266.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="289" y="359" width="42" height="28" fill="#252932"><title>Run 5, 2 MiB: -0.069%</title></rect>
+<text x="310.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="333" y="359" width="42" height="28" fill="#252932"><title>Run 6, 2 MiB: +0.009%</title></rect>
+<text x="354.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="377" y="359" width="42" height="28" fill="#252932"><title>Run 7, 2 MiB: -0.023%</title></rect>
+<text x="398.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="421" y="359" width="42" height="28" fill="#252932"><title>Run 8, 2 MiB: +0.019%</title></rect>
+<text x="442.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="465" y="359" width="42" height="28" fill="#252932"><title>Run 9, 2 MiB: -0.022%</title></rect>
+<text x="486.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="509" y="359" width="42" height="28" fill="#252932"><title>Run 10, 2 MiB: -0.000%</title></rect>
+<text x="530.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="553" y="359" width="42" height="28" fill="#252932"><title>Run 11, 2 MiB: -0.038%</title></rect>
+<text x="574.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="597" y="359" width="42" height="28" fill="#252932"><title>Run 12, 2 MiB: -0.017%</title></rect>
+<text x="618.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="641" y="359" width="42" height="28" fill="#252932"><title>Run 13, 2 MiB: +0.021%</title></rect>
+<text x="662.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="685" y="359" width="42" height="28" fill="#252932"><title>Run 14, 2 MiB: +0.071%</title></rect>
+<text x="706.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="729" y="359" width="42" height="28" fill="#252932"><title>Run 15, 2 MiB: -0.002%</title></rect>
+<text x="750.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="773" y="359" width="42" height="28" fill="#252932"><title>Run 16, 2 MiB: +0.057%</title></rect>
+<text x="794.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="817" y="359" width="42" height="28" fill="#252932"><title>Run 17, 2 MiB: +0.000%</title></rect>
+<text x="838.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="861" y="359" width="42" height="28" fill="#252a32"><title>Run 18, 2 MiB: +0.119%</title></rect>
+<text x="882.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="905" y="359" width="42" height="28" fill="#252932"><title>Run 19, 2 MiB: +0.015%</title></rect>
+<text x="926.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="949" y="359" width="42" height="28" fill="#252932"><title>Run 20, 2 MiB: -0.046%</title></rect>
+<text x="970.0" y="376.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="1027" y="359" width="92" height="28" fill="#252932"><title>2 MiB even minus odd: +0.026%</title></rect>
+<text x="1073.0" y="377.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+0.0%</text>
+<text x="102" y="407.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">4 MiB</text>
+<rect x="113" y="389" width="42" height="28" fill="#252932"><title>Run 1, 4 MiB: +0.050%</title></rect>
+<text x="134.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="157" y="389" width="42" height="28" fill="#252a32"><title>Run 2, 4 MiB: +0.135%</title></rect>
+<text x="178.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="201" y="389" width="42" height="28" fill="#252932"><title>Run 3, 4 MiB: -0.013%</title></rect>
+<text x="222.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="245" y="389" width="42" height="28" fill="#252932"><title>Run 4, 4 MiB: +0.028%</title></rect>
+<text x="266.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="289" y="389" width="42" height="28" fill="#252932"><title>Run 5, 4 MiB: +0.007%</title></rect>
+<text x="310.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="333" y="389" width="42" height="28" fill="#252932"><title>Run 6, 4 MiB: -0.035%</title></rect>
+<text x="354.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="377" y="389" width="42" height="28" fill="#252932"><title>Run 7, 4 MiB: -0.015%</title></rect>
+<text x="398.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="421" y="389" width="42" height="28" fill="#252932"><title>Run 8, 4 MiB: +0.016%</title></rect>
+<text x="442.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="465" y="389" width="42" height="28" fill="#252932"><title>Run 9, 4 MiB: -0.007%</title></rect>
+<text x="486.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="509" y="389" width="42" height="28" fill="#252932"><title>Run 10, 4 MiB: +0.071%</title></rect>
+<text x="530.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="553" y="389" width="42" height="28" fill="#252932"><title>Run 11, 4 MiB: -0.044%</title></rect>
+<text x="574.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="597" y="389" width="42" height="28" fill="#252932"><title>Run 12, 4 MiB: -0.153%</title></rect>
+<text x="618.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="641" y="389" width="42" height="28" fill="#252932"><title>Run 13, 4 MiB: +0.083%</title></rect>
+<text x="662.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.1</text>
+<rect x="685" y="389" width="42" height="28" fill="#252932"><title>Run 14, 4 MiB: -0.009%</title></rect>
+<text x="706.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="729" y="389" width="42" height="28" fill="#252932"><title>Run 15, 4 MiB: +0.011%</title></rect>
+<text x="750.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="773" y="389" width="42" height="28" fill="#252932"><title>Run 16, 4 MiB: -0.030%</title></rect>
+<text x="794.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="817" y="389" width="42" height="28" fill="#252932"><title>Run 17, 4 MiB: -0.014%</title></rect>
+<text x="838.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="861" y="389" width="42" height="28" fill="#252932"><title>Run 18, 4 MiB: +0.009%</title></rect>
+<text x="882.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="905" y="389" width="42" height="28" fill="#252932"><title>Run 19, 4 MiB: +0.015%</title></rect>
+<text x="926.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="949" y="389" width="42" height="28" fill="#252932"><title>Run 20, 4 MiB: -0.088%</title></rect>
+<text x="970.0" y="406.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="1027" y="389" width="92" height="28" fill="#252932"><title>4 MiB even minus odd: +0.000%</title></rect>
+<text x="1073.0" y="407.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+0.0%</text>
+<text x="102" y="437.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">6 MiB</text>
+<rect x="113" y="419" width="42" height="28" fill="#213836"><title>Run 1, 6 MiB: -6.816%</title></rect>
+<text x="134.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.8</text>
+<rect x="157" y="419" width="42" height="28" fill="#28493f"><title>Run 2, 6 MiB: +7.052%</title></rect>
+<text x="178.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+7.1</text>
+<rect x="201" y="419" width="42" height="28" fill="#213836"><title>Run 3, 6 MiB: -6.761%</title></rect>
+<text x="222.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.8</text>
+<rect x="245" y="419" width="42" height="28" fill="#28493f"><title>Run 4, 6 MiB: +7.032%</title></rect>
+<text x="266.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+7.0</text>
+<rect x="289" y="419" width="42" height="28" fill="#213836"><title>Run 5, 6 MiB: -6.792%</title></rect>
+<text x="310.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.8</text>
+<rect x="333" y="419" width="42" height="28" fill="#28493f"><title>Run 6, 6 MiB: +6.920%</title></rect>
+<text x="354.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+6.9</text>
+<rect x="377" y="419" width="42" height="28" fill="#213836"><title>Run 7, 6 MiB: -6.826%</title></rect>
+<text x="398.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.8</text>
+<rect x="421" y="419" width="42" height="28" fill="#28483e"><title>Run 8, 6 MiB: +6.751%</title></rect>
+<text x="442.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+6.8</text>
+<rect x="465" y="419" width="42" height="28" fill="#213836"><title>Run 9, 6 MiB: -6.735%</title></rect>
+<text x="486.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.7</text>
+<rect x="509" y="419" width="42" height="28" fill="#28493f"><title>Run 10, 6 MiB: +7.084%</title></rect>
+<text x="530.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+7.1</text>
+<rect x="553" y="419" width="42" height="28" fill="#213836"><title>Run 11, 6 MiB: -6.746%</title></rect>
+<text x="574.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.7</text>
+<rect x="597" y="419" width="42" height="28" fill="#284b40"><title>Run 12, 6 MiB: +7.406%</title></rect>
+<text x="618.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+7.4</text>
+<rect x="641" y="419" width="42" height="28" fill="#213836"><title>Run 13, 6 MiB: -6.779%</title></rect>
+<text x="662.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.8</text>
+<rect x="685" y="419" width="42" height="28" fill="#28493f"><title>Run 14, 6 MiB: +7.050%</title></rect>
+<text x="706.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+7.0</text>
+<rect x="729" y="419" width="42" height="28" fill="#213836"><title>Run 15, 6 MiB: -6.789%</title></rect>
+<text x="750.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.8</text>
+<rect x="773" y="419" width="42" height="28" fill="#284a3f"><title>Run 16, 6 MiB: +7.195%</title></rect>
+<text x="794.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+7.2</text>
+<rect x="817" y="419" width="42" height="28" fill="#213836"><title>Run 17, 6 MiB: -6.906%</title></rect>
+<text x="838.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.9</text>
+<rect x="861" y="419" width="42" height="28" fill="#28483e"><title>Run 18, 6 MiB: +6.735%</title></rect>
+<text x="882.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+6.7</text>
+<rect x="905" y="419" width="42" height="28" fill="#213836"><title>Run 19, 6 MiB: -6.751%</title></rect>
+<text x="926.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-6.8</text>
+<rect x="949" y="419" width="42" height="28" fill="#28483e"><title>Run 20, 6 MiB: +6.786%</title></rect>
+<text x="970.0" y="436.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+6.8</text>
+<rect x="1027" y="419" width="92" height="28" fill="#2b684b"><title>6 MiB even minus odd: +13.825%</title></rect>
+<text x="1073.0" y="437.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+13.8%</text>
+<text x="102" y="467.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">8 MiB</text>
+<rect x="113" y="449" width="42" height="28" fill="#242d33"><title>Run 1, 8 MiB: -1.658%</title></rect>
+<text x="134.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-1.7</text>
+<rect x="157" y="449" width="42" height="28" fill="#273f3b"><title>Run 2, 8 MiB: +4.856%</title></rect>
+<text x="178.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+4.9</text>
+<rect x="201" y="449" width="42" height="28" fill="#242b33"><title>Run 3, 8 MiB: -1.146%</title></rect>
+<text x="222.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-1.1</text>
+<rect x="245" y="449" width="42" height="28" fill="#252e34"><title>Run 4, 8 MiB: +1.146%</title></rect>
+<text x="266.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.1</text>
+<rect x="289" y="449" width="42" height="28" fill="#242e33"><title>Run 5, 8 MiB: -2.172%</title></rect>
+<text x="310.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-2.2</text>
+<rect x="333" y="449" width="42" height="28" fill="#263838"><title>Run 6, 8 MiB: +3.329%</title></rect>
+<text x="354.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+3.3</text>
+<rect x="377" y="449" width="42" height="28" fill="#242e33"><title>Run 7, 8 MiB: -2.151%</title></rect>
+<text x="398.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-2.2</text>
+<rect x="421" y="449" width="42" height="28" fill="#263838"><title>Run 8, 8 MiB: +3.385%</title></rect>
+<text x="442.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+3.4</text>
+<rect x="465" y="449" width="42" height="28" fill="#242c33"><title>Run 9, 8 MiB: -1.417%</title></rect>
+<text x="486.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-1.4</text>
+<rect x="509" y="449" width="42" height="28" fill="#263838"><title>Run 10, 8 MiB: +3.199%</title></rect>
+<text x="530.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+3.2</text>
+<rect x="553" y="449" width="42" height="28" fill="#242d33"><title>Run 11, 8 MiB: -1.639%</title></rect>
+<text x="574.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-1.6</text>
+<rect x="597" y="449" width="42" height="28" fill="#27413c"><title>Run 12, 8 MiB: +5.251%</title></rect>
+<text x="618.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+5.3</text>
+<rect x="641" y="449" width="42" height="28" fill="#242d33"><title>Run 13, 8 MiB: -2.048%</title></rect>
+<text x="662.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-2.0</text>
+<rect x="685" y="449" width="42" height="28" fill="#273a39"><title>Run 14, 8 MiB: +3.806%</title></rect>
+<text x="706.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+3.8</text>
+<rect x="729" y="449" width="42" height="28" fill="#242e33"><title>Run 15, 8 MiB: -2.244%</title></rect>
+<text x="750.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-2.2</text>
+<rect x="773" y="449" width="42" height="28" fill="#263135"><title>Run 16, 8 MiB: +1.651%</title></rect>
+<text x="794.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.7</text>
+<rect x="817" y="449" width="42" height="28" fill="#232f34"><title>Run 17, 8 MiB: -2.957%</title></rect>
+<text x="838.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-3.0</text>
+<rect x="861" y="449" width="42" height="28" fill="#263135"><title>Run 18, 8 MiB: +1.752%</title></rect>
+<text x="882.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.8</text>
+<rect x="905" y="449" width="42" height="28" fill="#242d33"><title>Run 19, 8 MiB: -1.641%</title></rect>
+<text x="926.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-1.6</text>
+<rect x="949" y="449" width="42" height="28" fill="#263336"><title>Run 20, 8 MiB: +2.099%</title></rect>
+<text x="970.0" y="466.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+2.1</text>
+<rect x="1027" y="449" width="92" height="28" fill="#27403b"><title>8 MiB even minus odd: +5.117%</title></rect>
+<text x="1073.0" y="467.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+5.1%</text>
+<text x="102" y="497.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">10 MiB</text>
+<rect x="113" y="479" width="42" height="28" fill="#19513c"><title>Run 1, 10 MiB: -18.457%</title></rect>
+<text x="134.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-18.5</text>
+<rect x="157" y="479" width="42" height="28" fill="#2d8155"><title>Run 2, 10 MiB: +19.216%</title></rect>
+<text x="178.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+19.2</text>
+<rect x="201" y="479" width="42" height="28" fill="#19523c"><title>Run 3, 10 MiB: -19.189%</title></rect>
+<text x="222.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-19.2</text>
+<rect x="245" y="479" width="42" height="28" fill="#2d8457"><title>Run 4, 10 MiB: +20.045%</title></rect>
+<text x="266.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+20.0</text>
+<rect x="289" y="479" width="42" height="28" fill="#19513c"><title>Run 5, 10 MiB: -18.525%</title></rect>
+<text x="310.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-18.5</text>
+<rect x="333" y="479" width="42" height="28" fill="#2c7952"><title>Run 6, 10 MiB: +17.578%</title></rect>
+<text x="354.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+17.6</text>
+<rect x="377" y="479" width="42" height="28" fill="#19523c"><title>Run 7, 10 MiB: -18.965%</title></rect>
+<text x="398.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-19.0</text>
+<rect x="421" y="479" width="42" height="28" fill="#2d8055"><title>Run 8, 10 MiB: +19.106%</title></rect>
+<text x="442.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+19.1</text>
+<rect x="465" y="479" width="42" height="28" fill="#19503b"><title>Run 9, 10 MiB: -18.205%</title></rect>
+<text x="486.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-18.2</text>
+<rect x="509" y="479" width="42" height="28" fill="#2c7a53"><title>Run 10, 10 MiB: +17.705%</title></rect>
+<text x="530.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+17.7</text>
+<rect x="553" y="479" width="42" height="28" fill="#19523c"><title>Run 11, 10 MiB: -18.896%</title></rect>
+<text x="574.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-18.9</text>
+<rect x="597" y="479" width="42" height="28" fill="#2d7f55"><title>Run 12, 10 MiB: +18.949%</title></rect>
+<text x="618.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+18.9</text>
+<rect x="641" y="479" width="42" height="28" fill="#19533c"><title>Run 13, 10 MiB: -19.412%</title></rect>
+<text x="662.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-19.4</text>
+<rect x="685" y="479" width="42" height="28" fill="#2d8256"><title>Run 14, 10 MiB: +19.434%</title></rect>
+<text x="706.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+19.4</text>
+<rect x="729" y="479" width="42" height="28" fill="#18543c"><title>Run 15, 10 MiB: -19.990%</title></rect>
+<text x="750.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-20.0</text>
+<rect x="773" y="479" width="42" height="28" fill="#2c7a53"><title>Run 16, 10 MiB: +17.750%</title></rect>
+<text x="794.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+17.7</text>
+<rect x="817" y="479" width="42" height="28" fill="#1a4f3b"><title>Run 17, 10 MiB: -17.578%</title></rect>
+<text x="838.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-17.6</text>
+<rect x="861" y="479" width="42" height="28" fill="#2c7e54"><title>Run 18, 10 MiB: +18.708%</title></rect>
+<text x="882.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+18.7</text>
+<rect x="905" y="479" width="42" height="28" fill="#19513c"><title>Run 19, 10 MiB: -18.614%</title></rect>
+<text x="926.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-18.6</text>
+<rect x="949" y="479" width="42" height="28" fill="#2d8055"><title>Run 20, 10 MiB: +19.118%</title></rect>
+<text x="970.0" y="496.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+19.1</text>
+<rect x="1027" y="479" width="92" height="28" fill="#2f9b60"><title>10 MiB even minus odd: +37.783%</title></rect>
+<text x="1073.0" y="497.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+37.8%</text>
+<text x="102" y="527.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">12 MiB</text>
+<rect x="113" y="509" width="42" height="28" fill="#18543c"><title>Run 1, 12 MiB: -19.773%</title></rect>
+<text x="134.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-19.8</text>
+<rect x="157" y="509" width="42" height="28" fill="#2d8256"><title>Run 2, 12 MiB: +19.461%</title></rect>
+<text x="178.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+19.5</text>
+<rect x="201" y="509" width="42" height="28" fill="#18543c"><title>Run 3, 12 MiB: -20.038%</title></rect>
+<text x="222.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-20.0</text>
+<rect x="245" y="509" width="42" height="28" fill="#2d8557"><title>Run 4, 12 MiB: +20.132%</title></rect>
+<text x="266.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+20.1</text>
+<rect x="289" y="509" width="42" height="28" fill="#18563d"><title>Run 5, 12 MiB: -20.737%</title></rect>
+<text x="310.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-20.7</text>
+<rect x="333" y="509" width="42" height="28" fill="#2e8f5b"><title>Run 6, 12 MiB: +22.378%</title></rect>
+<text x="354.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+22.4</text>
+<rect x="377" y="509" width="42" height="28" fill="#19523c"><title>Run 7, 12 MiB: -19.134%</title></rect>
+<text x="398.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-19.1</text>
+<rect x="421" y="509" width="42" height="28" fill="#2d8859"><title>Run 8, 12 MiB: +20.933%</title></rect>
+<text x="442.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+20.9</text>
+<rect x="465" y="509" width="42" height="28" fill="#18563d"><title>Run 9, 12 MiB: -20.743%</title></rect>
+<text x="486.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-20.7</text>
+<rect x="509" y="509" width="42" height="28" fill="#2d7f55"><title>Run 10, 12 MiB: +18.771%</title></rect>
+<text x="530.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+18.8</text>
+<rect x="553" y="509" width="42" height="28" fill="#19533c"><title>Run 11, 12 MiB: -19.314%</title></rect>
+<text x="574.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-19.3</text>
+<rect x="597" y="509" width="42" height="28" fill="#2e8a59"><title>Run 12, 12 MiB: +21.343%</title></rect>
+<text x="618.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+21.3</text>
+<rect x="641" y="509" width="42" height="28" fill="#19513c"><title>Run 13, 12 MiB: -18.643%</title></rect>
+<text x="662.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-18.6</text>
+<rect x="685" y="509" width="42" height="28" fill="#2d8658"><title>Run 14, 12 MiB: +20.459%</title></rect>
+<text x="706.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+20.5</text>
+<rect x="729" y="509" width="42" height="28" fill="#19523c"><title>Run 15, 12 MiB: -19.150%</title></rect>
+<text x="750.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-19.2</text>
+<rect x="773" y="509" width="42" height="28" fill="#2c7e54"><title>Run 16, 12 MiB: +18.643%</title></rect>
+<text x="794.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+18.6</text>
+<rect x="817" y="509" width="42" height="28" fill="#18543c"><title>Run 17, 12 MiB: -20.097%</title></rect>
+<text x="838.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-20.1</text>
+<rect x="861" y="509" width="42" height="28" fill="#2d8256"><title>Run 18, 12 MiB: +19.606%</title></rect>
+<text x="882.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+19.6</text>
+<rect x="905" y="509" width="42" height="28" fill="#19523c"><title>Run 19, 12 MiB: -19.105%</title></rect>
+<text x="926.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-19.1</text>
+<rect x="949" y="509" width="42" height="28" fill="#2d8256"><title>Run 20, 12 MiB: +19.453%</title></rect>
+<text x="970.0" y="526.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+19.5</text>
+<rect x="1027" y="509" width="92" height="28" fill="#2f9b60"><title>12 MiB even minus odd: +39.413%</title></rect>
+<text x="1073.0" y="527.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+39.4%</text>
+<text x="102" y="557.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">14 MiB</text>
+<rect x="113" y="539" width="42" height="28" fill="#2b6f4e"><title>Run 1, 14 MiB: +15.398%</title></rect>
+<text x="134.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+15.4</text>
+<rect x="157" y="539" width="42" height="28" fill="#1b4a3a"><title>Run 2, 14 MiB: -15.292%</title></rect>
+<text x="178.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-15.3</text>
+<rect x="201" y="539" width="42" height="28" fill="#2b714f"><title>Run 3, 14 MiB: +15.834%</title></rect>
+<text x="222.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+15.8</text>
+<rect x="245" y="539" width="42" height="28" fill="#1b493a"><title>Run 4, 14 MiB: -15.036%</title></rect>
+<text x="266.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-15.0</text>
+<rect x="289" y="539" width="42" height="28" fill="#2b704f"><title>Run 5, 14 MiB: +15.637%</title></rect>
+<text x="310.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+15.6</text>
+<rect x="333" y="539" width="42" height="28" fill="#1c493a"><title>Run 6, 14 MiB: -14.831%</title></rect>
+<text x="354.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-14.8</text>
+<rect x="377" y="539" width="42" height="28" fill="#2b6d4d"><title>Run 7, 14 MiB: +14.891%</title></rect>
+<text x="398.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+14.9</text>
+<rect x="421" y="539" width="42" height="28" fill="#1a4d3b"><title>Run 8, 14 MiB: -16.596%</title></rect>
+<text x="442.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-16.6</text>
+<rect x="465" y="539" width="42" height="28" fill="#2b6a4c"><title>Run 9, 14 MiB: +14.197%</title></rect>
+<text x="486.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+14.2</text>
+<rect x="509" y="539" width="42" height="28" fill="#1c4839"><title>Run 10, 14 MiB: -14.197%</title></rect>
+<text x="530.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-14.2</text>
+<rect x="553" y="539" width="42" height="28" fill="#2b714f"><title>Run 11, 14 MiB: +15.804%</title></rect>
+<text x="574.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+15.8</text>
+<rect x="597" y="539" width="42" height="28" fill="#1b4a3a"><title>Run 12, 14 MiB: -15.330%</title></rect>
+<text x="618.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-15.3</text>
+<rect x="641" y="539" width="42" height="28" fill="#2c7d54"><title>Run 13, 14 MiB: +18.481%</title></rect>
+<text x="662.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+18.5</text>
+<rect x="685" y="539" width="42" height="28" fill="#1c493a"><title>Run 14, 14 MiB: -14.621%</title></rect>
+<text x="706.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-14.6</text>
+<rect x="729" y="539" width="42" height="28" fill="#2b6f4e"><title>Run 15, 14 MiB: +15.257%</title></rect>
+<text x="750.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+15.3</text>
+<rect x="773" y="539" width="42" height="28" fill="#1c4839"><title>Run 16, 14 MiB: -14.297%</title></rect>
+<text x="794.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-14.3</text>
+<rect x="817" y="539" width="42" height="28" fill="#2b6d4d"><title>Run 17, 14 MiB: +14.908%</title></rect>
+<text x="838.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+14.9</text>
+<rect x="861" y="539" width="42" height="28" fill="#1b4a3a"><title>Run 18, 14 MiB: -15.100%</title></rect>
+<text x="882.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-15.1</text>
+<rect x="905" y="539" width="42" height="28" fill="#2b6c4d"><title>Run 19, 14 MiB: +14.630%</title></rect>
+<text x="926.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+14.6</text>
+<rect x="949" y="539" width="42" height="28" fill="#1b4a3a"><title>Run 20, 14 MiB: -15.374%</title></rect>
+<text x="970.0" y="556.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-15.4</text>
+<rect x="1027" y="539" width="92" height="28" fill="#155f3f"><title>14 MiB even minus odd: -30.395%</title></rect>
+<text x="1073.0" y="557.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">-30.4%</text>
+<text x="102" y="587.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">16 MiB</text>
+<rect x="113" y="569" width="42" height="28" fill="#252a32"><title>Run 1, 16 MiB: -0.529%</title></rect>
+<text x="134.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.5</text>
+<rect x="157" y="569" width="42" height="28" fill="#263236"><title>Run 2, 16 MiB: +1.940%</title></rect>
+<text x="178.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.9</text>
+<rect x="201" y="569" width="42" height="28" fill="#252b32"><title>Run 3, 16 MiB: -0.758%</title></rect>
+<text x="222.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.8</text>
+<rect x="245" y="569" width="42" height="28" fill="#252a32"><title>Run 4, 16 MiB: +0.169%</title></rect>
+<text x="266.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="289" y="569" width="42" height="28" fill="#233034"><title>Run 5, 16 MiB: -3.016%</title></rect>
+<text x="310.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-3.0</text>
+<rect x="333" y="569" width="42" height="28" fill="#262f34"><title>Run 6, 16 MiB: +1.302%</title></rect>
+<text x="354.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.3</text>
+<rect x="377" y="569" width="42" height="28" fill="#232f34"><title>Run 7, 16 MiB: -2.891%</title></rect>
+<text x="398.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-2.9</text>
+<rect x="421" y="569" width="42" height="28" fill="#263336"><title>Run 8, 16 MiB: +2.114%</title></rect>
+<text x="442.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+2.1</text>
+<rect x="465" y="569" width="42" height="28" fill="#232f34"><title>Run 9, 16 MiB: -2.952%</title></rect>
+<text x="486.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-3.0</text>
+<rect x="509" y="569" width="42" height="28" fill="#252e34"><title>Run 10, 16 MiB: +1.039%</title></rect>
+<text x="530.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.0</text>
+<rect x="553" y="569" width="42" height="28" fill="#252932"><title>Run 11, 16 MiB: -0.169%</title></rect>
+<text x="574.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="597" y="569" width="42" height="28" fill="#263537"><title>Run 12, 16 MiB: +2.686%</title></rect>
+<text x="618.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+2.7</text>
+<rect x="641" y="569" width="42" height="28" fill="#242c33"><title>Run 13, 16 MiB: -1.288%</title></rect>
+<text x="662.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-1.3</text>
+<rect x="685" y="569" width="42" height="28" fill="#273b39"><title>Run 14, 16 MiB: +4.031%</title></rect>
+<text x="706.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+4.0</text>
+<rect x="729" y="569" width="42" height="28" fill="#242c33"><title>Run 15, 16 MiB: -1.305%</title></rect>
+<text x="750.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-1.3</text>
+<rect x="773" y="569" width="42" height="28" fill="#252e34"><title>Run 16, 16 MiB: +1.138%</title></rect>
+<text x="794.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.1</text>
+<rect x="817" y="569" width="42" height="28" fill="#242d33"><title>Run 17, 16 MiB: -2.057%</title></rect>
+<text x="838.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-2.1</text>
+<rect x="861" y="569" width="42" height="28" fill="#263336"><title>Run 18, 16 MiB: +2.167%</title></rect>
+<text x="882.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+2.2</text>
+<rect x="905" y="569" width="42" height="28" fill="#242d33"><title>Run 19, 16 MiB: -1.873%</title></rect>
+<text x="926.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-1.9</text>
+<rect x="949" y="569" width="42" height="28" fill="#263035"><title>Run 20, 16 MiB: +1.466%</title></rect>
+<text x="970.0" y="586.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.5</text>
+<rect x="1027" y="569" width="92" height="28" fill="#263838"><title>16 MiB even minus odd: +3.292%</title></rect>
+<text x="1073.0" y="587.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">+3.3%</text>
+<text x="102" y="617.0" text-anchor="end" font-family="sans-serif" font-size="11" fill="#f7fff9">32 MiB</text>
+<rect x="113" y="599" width="42" height="28" fill="#252b33"><title>Run 1, 32 MiB: +0.434%</title></rect>
+<text x="134.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.4</text>
+<rect x="157" y="599" width="42" height="28" fill="#252932"><title>Run 2, 32 MiB: -0.171%</title></rect>
+<text x="178.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.2</text>
+<rect x="201" y="599" width="42" height="28" fill="#252f34"><title>Run 3, 32 MiB: +1.243%</title></rect>
+<text x="222.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+1.2</text>
+<rect x="245" y="599" width="42" height="28" fill="#252a32"><title>Run 4, 32 MiB: -0.303%</title></rect>
+<text x="266.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.3</text>
+<rect x="289" y="599" width="42" height="28" fill="#252a32"><title>Run 5, 32 MiB: +0.263%</title></rect>
+<text x="310.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="333" y="599" width="42" height="28" fill="#252c33"><title>Run 6, 32 MiB: +0.741%</title></rect>
+<text x="354.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.7</text>
+<rect x="377" y="599" width="42" height="28" fill="#252b33"><title>Run 7, 32 MiB: +0.467%</title></rect>
+<text x="398.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.5</text>
+<rect x="421" y="599" width="42" height="28" fill="#252a33"><title>Run 8, 32 MiB: +0.273%</title></rect>
+<text x="442.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="465" y="599" width="42" height="28" fill="#242b32"><title>Run 9, 32 MiB: -0.905%</title></rect>
+<text x="486.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.9</text>
+<rect x="509" y="599" width="42" height="28" fill="#252932"><title>Run 10, 32 MiB: -0.043%</title></rect>
+<text x="530.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.0</text>
+<rect x="553" y="599" width="42" height="28" fill="#252a32"><title>Run 11, 32 MiB: -0.435%</title></rect>
+<text x="574.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.4</text>
+<rect x="597" y="599" width="42" height="28" fill="#263336"><title>Run 12, 32 MiB: +2.298%</title></rect>
+<text x="618.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+2.3</text>
+<rect x="641" y="599" width="42" height="28" fill="#252a33"><title>Run 13, 32 MiB: +0.277%</title></rect>
+<text x="662.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.3</text>
+<rect x="685" y="599" width="42" height="28" fill="#252932"><title>Run 14, 32 MiB: -0.139%</title></rect>
+<text x="706.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="729" y="599" width="42" height="28" fill="#252932"><title>Run 15, 32 MiB: -0.141%</title></rect>
+<text x="750.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="773" y="599" width="42" height="28" fill="#252a32"><title>Run 16, 32 MiB: +0.172%</title></rect>
+<text x="794.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.2</text>
+<rect x="817" y="599" width="42" height="28" fill="#252a32"><title>Run 17, 32 MiB: -0.267%</title></rect>
+<text x="838.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.3</text>
+<rect x="861" y="599" width="42" height="28" fill="#252a32"><title>Run 18, 32 MiB: -0.530%</title></rect>
+<text x="882.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.5</text>
+<rect x="905" y="599" width="42" height="28" fill="#252932"><title>Run 19, 32 MiB: +0.043%</title></rect>
+<text x="926.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">+0.0</text>
+<rect x="949" y="599" width="42" height="28" fill="#252932"><title>Run 20, 32 MiB: -0.127%</title></rect>
+<text x="970.0" y="616.0" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#f7fff9">-0.1</text>
+<rect x="1027" y="599" width="92" height="28" fill="#252a32"><title>32 MiB even minus odd: -0.238%</title></rect>
+<text x="1073.0" y="617.0" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#f7fff9">-0.2%</text>
+<rect x="112" y="658" width="76" height="16" fill="#155f3f"/>
+<text x="150" y="688" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">-25.0%</text>
+<rect x="188" y="658" width="76" height="16" fill="#1d4438"/>
+<text x="226" y="688" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">-12.5%</text>
+<rect x="264" y="658" width="76" height="16" fill="#252932"/>
+<text x="302" y="688" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">+0.0%</text>
+<rect x="340" y="658" width="76" height="16" fill="#2a6249"/>
+<text x="378" y="688" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">+12.5%</text>
+<rect x="416" y="658" width="76" height="16" fill="#2f9b60"/>
+<text x="454" y="688" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b8c8be">+25.0%</text>
+<text x="552.0" y="692" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#f7fff9">Run number</text>
+<text x="24" y="358.0" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#f7fff9" transform="rotate(-90 24 358.0)">Working-set size</text>
+</svg>
