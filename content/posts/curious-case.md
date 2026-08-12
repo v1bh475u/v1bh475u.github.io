@@ -1,6 +1,5 @@
 +++
 date = '2026-07-14T12:07:07+05:30'
-draft = true
 title = 'A curious case of alternating good and bad allocations'
 author = 'vibhatsu'
 tags = ["cache-analysis", "linux-memory-management", "hugetlb", "huge-pages", "performance"]
