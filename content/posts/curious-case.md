@@ -1,5 +1,5 @@
 +++
-date = '2026-07-14T12:07:07+05:30'
+date = '2026-09-04T12:07:07+05:30'
 title = 'A curious case of alternating good and bad allocations'
 author = 'vibhatsu'
 tags = ["cache-analysis", "linux-memory-management", "hugetlb", "huge-pages", "performance"]
@@ -11,7 +11,7 @@ comments = true
 keywords = ["HugeTLB", "Linux buddy allocator", "explicit huge pages", "LLC", "cache latency", "PFN", "physical memory layout", "Intel Alder Lake", "cache associativity", "page allocation"]
 +++
 
-In the previous blog [here](https://vibhatsu.me/posts/cache-walk), I tried to replicate the textbook plot on my machine. I had to tweak a lot of knobs before finally finding the plot, but the cause of the plot was completely unexplained. In this post, I am going to continue my journey of analyzing why the plot did not appear in the first experiment itself!
+In the previous blog [here](https://vibhatsu.me/posts/cache-walk), I tried to replicate the textbook cache latency plot on my machine. I had to tweak a lot of knobs before finally finding the plot, but the cause of the plot was completely unexplained. In this post, I am going to continue my journey of analyzing why the plot did not appear in the first experiment itself!
 
 ## A Quick Recap
 
@@ -119,13 +119,14 @@ In my experiment, I do a `memset` on the entire region immediately after the `mm
 
 ## My surprise
 
-I assumed that I was getting mostly contiguous mappings, so there should not be much difference between odd and even runs, as the pages are still the same but in reverse order, right?
+I assumed that I was getting mostly contiguous mappings, so there should not be much difference between odd and even runs, as the pages are still the same but in reverse order as having contiguous memory usually implies that the addresses are spread evenly across the sets, right?
 
 Nope! Here's why: Let's say I get the following order on my odd run:
 
 ```
 V0 - P0, V1 - P1, ..., V15 - P15
 ```
+Here, `V0`, `V1`, ... are my virtual pages for the run and `P0`, `P1`, ... are the actual physical frames that are mapped to the virtual pages.
 
 Now, on my even run, since the order is reversed, I would get:
 
@@ -135,11 +136,13 @@ V0 - P15, V1 - P14, ..., V15 - P0
 
 Again, this is considering no external process messed with HugeTLB between the runs. So, for prefixes, the mapping changes.
 
-Here, `2 MiB` gets `V0`; `4 MiB` gets `V0`, `V1`; `6 MiB` gets `V0`, `V1`, `V2`; and so on. Now, since the physical frames supporting these virtual addresses differ, they can show different behaviours. But if I assume mostly contiguous memory, the results still should not be bad.
+Here, `2 MiB` uses `V0`; `4 MiB` uses `V0`, `V1`; `6 MiB` uses `V0`, `V1`, `V2`; and so on. Now, since the physical frames supporting these virtual addresses differ, they can show different behaviours. So, if one end is mostly contiguous memory but the other end is not so contiguous, I would observe some worse behaviour. But if I assume mostly contiguous memory across all the frames across all the frames across all the frames across all the frames across all the frames across all the frames across all the frames across all the frames across all the frames, the results still should not be bad.
 
 ## PFN logging
 
 To get closer to the answer, I decided to repeat the experiment, but this time, I logged the PFNs that were actually mapped to my virtual pages.
+
+To do this, I first extracted virtual page number, read the corresponding entry from `/prof/self/pagemap` and decode the physical frame number by discarding the lower 21 bits.
 
 The results:
 
@@ -151,7 +154,7 @@ The results:
 
 For the same-mapping case, I was lucky enough to have no disturbance from an external process in `HugeTLB` and to get exactly the same 16 huge pages in all runs.
 
-Notice that we have contiguous frames at one end and not-so-contiguous frames at the other. Now, the same backing uses prefixes. When the contiguous frames were at the starting end, the spread in L3 was extremely nice, and I got fewer L3 misses (these were the conflict misses that are now gone). At the other end, there were some conflict misses.
+Notice that we have contiguous frames at one end and not-so-contiguous frames at the other (as I feared). Now, the same backing uses prefixes. When the contiguous frames were at the starting end, the spread in L3 was extremely nice, and I got fewer L3 misses (these were the conflict misses that are now gone). At the other end, there were some conflict misses.
 
 I noticed a similar pattern for fresh allocation runs as well. The only differences were that there were 61 pages per run and that the `10 MiB` allocation was in the middle, getting the exact same pages irrespective of the order.
 
